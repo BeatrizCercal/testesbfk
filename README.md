@@ -1,28 +1,37 @@
-# Bia Fashion Kids — Protótipo de E-commerce
+# Bia Fashion Kids
 
-Protótipo (prospect) de loja virtual para a **Bia Fashion Kids**, construído com **Next.js 14 (App Router) + React + TypeScript + Tailwind CSS**.
+Loja virtual demonstrativa feita com Next.js, React, TypeScript, JSON e CSS.
 
-O layout foi inspirado na estrutura do site da **Loja Milon** (header com barra de categorias, hero em carrossel, grade de produtos e footer institucional), com a identidade visual adaptada às cores e ao estilo da logo da Bia Fashion Kids (rosa, dourado e azul-céu).
+## Tecnologias
 
-## ✨ O que está incluso
+- **Next.js e React** organizam as páginas e os componentes.
+- **TypeScript** descreve os dados e ajuda a encontrar erros no código.
+- **JSON** guarda os produtos e as categorias do catálogo.
+- **CSS** define a aparência do site. As cores compartilhadas ficam em `styles/theme.css`.
 
-- **TopBar** — faixa de avisos (frete grátis, parcelamento, trocas) com efeito de marquee.
-- **Header** — logo, busca, conta/favoritos/carrinho e menu de categorias (fixo no topo), com menu responsivo para mobile.
-- **Hero Carousel** — carrossel autoplay com 3 slides, setas, indicadores (dots) e respeito a `prefers-reduced-motion`.
-- **Categorias** — grade de atalhos (Meninas, Meninos, Bebês, Calçados, Casacos, Acessórios).
-- **Barra de benefícios** — frete grátis, parcelamento, troca fácil, compra segura.
-- **Grade de produtos** — com abas de filtro por categoria (dados mockados em `data/products.ts`).
-- **Banner promocional**.
-- **Newsletter** — captura de e-mail com cupom.
-- **Footer** — colunas institucionais, redes sociais, bandeiras de pagamento e selo de segurança.
+## Pastas principais
 
-Toda a ilustração de produtos e o logo estão em **SVG** (`components/icons`), servindo como placeholder até você substituir pelas fotos reais e pelo `.png` da logo.
+```text
+app/                  páginas e rotas do site
+components/           partes reutilizáveis das páginas
+components/icons/     ícones das roupas
+data/catalog/         dados em JSON
+data/products.ts      tipos e funções do catálogo
+public/               imagens e arquivos públicos
+styles/               estilos CSS e cores do tema
+```
 
-## 🎨 Identidade visual
+## Catálogo
 
-As cores em `tailwind.config.ts` (`brand.pink`, `brand.gold`, `brand.sky`, `brand.cream`, `brand.ink`) foram extraídas da logo enviada. As fontes usadas são **Baloo 2** (títulos, estilo lúdico/infantil) e **Nunito** (textos), carregadas via `next/font/google`.
+Edite `data/catalog/products.json` para alterar produtos e categorias. Os tipos usados pelo TypeScript e a função de formatação de preços ficam em `data/products.ts`.
 
-## 🚀 Como rodar localmente
+## Estilos
+
+Os estilos existentes estão em `styles/site.css`. As cores do tema ficam centralizadas em `styles/theme.css`, em variáveis CSS como `--color-pink`, `--color-sky` e `--color-text`.
+
+Para criar uma nova aparência, adicione uma classe CSS em `styles/site.css` e use o nome dessa classe no componente. Não é necessário instalar ou configurar um framework de CSS.
+
+## Executar localmente
 
 ```bash
 npm install
@@ -31,33 +40,9 @@ npm run dev
 
 Acesse [http://localhost:3000](http://localhost:3000).
 
-## 🏗️ Build de produção
+## Criar a versão de produção
 
 ```bash
 npm run build
 npm run start
 ```
-
-## 📁 Estrutura principal
-
-```
-app/
-  layout.tsx        # layout raiz, fontes e metadata
-  page.tsx           # monta a home juntando as seções
-  globals.css         # estilos globais e tokens utilitários
-components/
-  Header.tsx, TopBar.tsx, HeroCarousel.tsx
-  CategoryGrid.tsx, BenefitsBar.tsx
-  ProductGrid.tsx, ProductCard.tsx, PromoBanner.tsx
-  Newsletter.tsx, Footer.tsx
-  icons/              # Logo.tsx e ilustrações SVG das roupas
-data/
-  products.ts         # produtos, categorias e links de navegação (mock)
-```
-
-## 🔜 Próximos passos sugeridos
-
-1. Substituir `components/icons/Logo.tsx` pelo `.png`/`.svg` oficial (basta usar `<Image src="/logo.png" .../>` no lugar do componente `<Logo />`).
-2. Trocar as ilustrações SVG dos produtos por fotos reais.
-3. Conectar `data/products.ts` a uma fonte real (CMS, planilha ou plataforma de e-commerce como VTEX/Shopify/Nuvemshop).
-4. Implementar carrinho, checkout e autenticação de fato (hoje os botões são apenas visuais).

@@ -1,3 +1,5 @@
+import catalog from "@/data/catalog/products.json";
+
 export type IconKey =
   | "dress"
   | "polo"
@@ -19,102 +21,84 @@ export type Product = {
   badge?: "Lançamento" | "Mais vendido" | "Últimas peças";
 };
 
-export const products: Product[] = [
-  {
-    id: "vestido-flor-de-lis",
-    name: "Vestido Flor de Lis Rodado",
-    category: "Menina",
-    price: 89.9,
-    oldPrice: 119.9,
-    installments: "3x de R$ 29,97",
-    icon: "dress",
-    tint: "pink",
-    badge: "Mais vendido",
-  },
-  {
-    id: "polo-listrada-azul",
-    name: "Camisa Polo Listrada",
-    category: "Menino",
-    price: 64.9,
-    installments: "2x de R$ 32,45",
-    icon: "polo",
-    tint: "sky",
-  },
-  {
-    id: "body-nuvem-bebe",
-    name: "Body Soft Nuvem",
-    category: "Bebê",
-    price: 39.9,
-    installments: "2x de R$ 19,95",
-    icon: "onesie",
-    tint: "gold",
-    badge: "Lançamento",
-  },
-  {
-    id: "short-jeans-estrela",
-    name: "Short Jeans Estrelinha",
-    category: "Menina",
-    price: 54.9,
-    oldPrice: 69.9,
-    installments: "2x de R$ 27,45",
-    icon: "shorts",
-    tint: "pink",
-  },
-  {
-    id: "tenis-luz-colorido",
-    name: "Tênis com Luz Colorido",
-    category: "Menino",
-    price: 129.9,
-    installments: "4x de R$ 32,48",
-    icon: "shoe",
-    tint: "gold",
-    badge: "Últimas peças",
-  },
-  {
-    id: "jaqueta-corta-vento",
-    name: "Jaqueta Corta-Vento",
-    category: "Menino",
-    price: 99.9,
-    installments: "3x de R$ 33,30",
-    icon: "jacket",
-    tint: "sky",
-  },
-  {
-    id: "conjunto-laco-bebe",
-    name: "Conjunto Laço Encantado",
-    category: "Bebê",
-    price: 74.9,
-    oldPrice: 94.9,
-    installments: "2x de R$ 37,45",
-    icon: "accessory",
-    tint: "gold",
-  },
-  {
-    id: "vestido-poa-festa",
-    name: "Vestido Poá de Festa",
-    category: "Menina",
-    price: 109.9,
-    installments: "3x de R$ 36,63",
-    icon: "dress",
-    tint: "pink",
-    badge: "Lançamento",
-  },
-];
-
 export type Category = {
   name: string;
   href: string;
   icon: IconKey;
 };
 
-export const categories: Category[] = [
-  { name: "Meninas", href: "#produtos", icon: "dress" },
-  { name: "Meninos", href: "#produtos", icon: "polo" },
-  { name: "Bebês", href: "#produtos", icon: "onesie" },
-  { name: "Calçados", href: "#produtos", icon: "shoe" },
-  { name: "Casacos", href: "#produtos", icon: "jacket" },
-  { name: "Acessórios", href: "#produtos", icon: "accessory" },
+const iconKeys: IconKey[] = [
+  "dress",
+  "polo",
+  "onesie",
+  "shorts",
+  "shoe",
+  "jacket",
+  "accessory",
 ];
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
+function isIconKey(value: unknown): value is IconKey {
+  return typeof value === "string" && iconKeys.some((iconKey) => iconKey === value);
+}
+
+function isProduct(value: unknown): value is Product {
+  return (
+    isRecord(value) &&
+    typeof value.id === "string" &&
+    typeof value.name === "string" &&
+    typeof value.category === "string" &&
+    ["Menina", "Menino", "Bebê"].includes(value.category) &&
+    typeof value.price === "number" &&
+    (value.oldPrice === undefined || typeof value.oldPrice === "number") &&
+    typeof value.installments === "string" &&
+    isIconKey(value.icon) &&
+    typeof value.tint === "string" &&
+    ["pink", "sky", "gold"].includes(value.tint) &&
+    (value.badge === undefined ||
+      (typeof value.badge === "string" &&
+        ["Lançamento", "Mais vendido", "Últimas peças"].includes(value.badge)))
+  );
+}
+
+function isCategory(value: unknown): value is Category {
+  return (
+    isRecord(value) &&
+    typeof value.name === "string" &&
+    typeof value.href === "string" &&
+    isIconKey(value.icon)
+  );
+}
+
+function readEntries<T>(
+  entries: unknown,
+  isEntry: (entry: unknown) => entry is T,
+  name: string,
+): T[] {
+  if (!Array.isArray(entries)) {
+    throw new Error(`O catálogo JSON precisa ter uma lista de ${name}.`);
+  }
+
+  return entries.map((entry, index) => {
+    if (!isEntry(entry)) {
+      throw new Error(`O item ${index + 1} de ${name} tem dados inválidos.`);
+    }
+
+    return entry;
+  });
+}
+
+const catalogData: unknown = catalog;
+
+if (!isRecord(catalogData)) {
+  throw new Error("O arquivo JSON do catálogo tem um formato inválido.");
+}
+
+export const products = readEntries(catalogData.products, isProduct, "produtos");
+export const categories = readEntries(catalogData.categories, isCategory, "categorias");
 
 export function formatBRL(value: number): string {
   return value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });

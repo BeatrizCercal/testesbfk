@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-brand-cream text-brand-ink font-body antialiased;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-roboto), system-ui, sans-serif;
+}
+
+/* Visible keyboard focus, kept brand-consistent */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid #f4c21b;
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Scallop divider echoing the logo's dot-and-line mark */
+.scallop-divider {
+  position: relative;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.35;
+}
+.scallop-divider::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  background: currentColor;
+  opacity: 1;
+  border-radius: 9999px;
+  transform: translate(-50%, -50%);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

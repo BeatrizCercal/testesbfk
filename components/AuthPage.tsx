@@ -197,6 +197,17 @@ export function AuthPage({ mode }: AuthPageProps) {
                 {text.alternateAction}
               </Link>
             </p>
+            {isLogin && (
+              <div className="mt-6 border-t border-brand-ink/10 pt-5 text-center">
+                <p className="text-sm text-brand-ink/65">Acesso da equipe da loja</p>
+                <Link
+                  href="/admin"
+                  className="mt-2 inline-flex font-bold text-brand-sky-600 transition hover:text-brand-pink-600"
+                >
+                  Acessar painel administrativo
+                </Link>
+              </div>
+            )}
           </div>
         </section>
       </div>

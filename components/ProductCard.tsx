@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { formatBRL, type Product } from "@/data/products";
 import { iconMap } from "./icons";
@@ -44,11 +45,30 @@ export function ProductCard({ product }: { product: Product }) {
             />
           </svg>
         </button>
-        <Icon className="h-32 w-32 transition duration-300 hover:scale-105 sm:h-40 sm:w-40" aria-hidden="true" />
+        {product.image ? (
+          <Image
+            src={product.image}
+            alt={product.name}
+            width={480}
+            height={480}
+            unoptimized
+            className="h-full w-full rounded-lg object-cover"
+          />
+        ) : (
+          <Icon className="h-32 w-32 transition duration-300 hover:scale-105 sm:h-40 sm:w-40" aria-hidden="true" />
+        )}
       </div>
 
       <div className="flex flex-1 flex-col pt-5 text-center">
         <h3 className="line-clamp-2 text-base text-black">{product.name}</h3>
+        {product.description && (
+          <p className="mt-2 line-clamp-2 text-sm text-black/60">{product.description}</p>
+        )}
+        {product.sizes && product.sizes.length > 0 && (
+          <p className="mt-2 text-xs font-semibold text-brand-sky-600">
+            Tamanhos: {product.sizes.join(", ")}
+          </p>
+        )}
 
         <div className="mt-auto pt-4">
           {product.oldPrice && (

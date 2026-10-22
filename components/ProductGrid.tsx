@@ -1,17 +1,35 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { products, type Product } from "@/data/products";
+import { useEffect, useMemo, useState } from "react";
+import { isProduct, products as initialProducts, PRODUCT_STORAGE_KEY, type Product } from "@/data/products";
 import { ProductCard } from "./ProductCard";
 
 const tabs: Array<Product["category"] | "Todos"> = ["Todos", "Menina", "Menino", "Bebê"];
 
 export function ProductGrid() {
   const [active, setActive] = useState<(typeof tabs)[number]>("Todos");
+  const [products, setProducts] = useState<Product[]>(initialProducts);
+  const [catalogMessage, setCatalogMessage] = useState("");
+
+  useEffect(() => {
+    try {
+      const savedProducts = window.localStorage.getItem(PRODUCT_STORAGE_KEY);
+      if (!savedProducts) return;
+
+      const parsedProducts: unknown = JSON.parse(savedProducts);
+      if (!Array.isArray(parsedProducts) || !parsedProducts.every(isProduct)) {
+        setCatalogMessage("Não foi possível exibir os produtos salvos neste navegador.");
+        return;
+      }
+      setProducts(parsedProducts);
+    } catch {
+      setCatalogMessage("Não foi possível carregar o catálogo salvo neste navegador.");
+    }
+  }, []);
 
   const filtered = useMemo(
     () => (active === "Todos" ? products : products.filter((p) => p.category === active)),
-    [active]
+    [active, products]
   );
 
   return (
@@ -49,6 +67,7 @@ export function ProductGrid() {
           <ProductCard key={product.id} product={product} />
         ))}
       </div>
+      {catalogMessage && <p role="status" className="mt-5 text-center text-sm text-brand-pink-600">{catalogMessage}</p>}
     </section>
   );
 }

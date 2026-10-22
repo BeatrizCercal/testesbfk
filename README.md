@@ -25,6 +25,10 @@ styles/               estilos CSS e cores do tema
 
 Edite `data/catalog/products.json` para alterar produtos e categorias. Os tipos usados pelo TypeScript e a função de formatação de preços ficam em `data/products.ts`.
 
+O painel administrativo permite cadastrar e remover calçados e acessórios, com foto, descrição e tamanhos. As alterações ficam salvas no navegador usado para administrá-las. As vendas exibidas são dados de demonstração; para acompanhar pedidos reais, é necessário conectar o painel a uma plataforma ou banco de dados.
+
+O acesso ao painel está abaixo do formulário de entrada em `/entrar`.
+
 ## Estilos
 
 Os estilos existentes estão em `styles/site.css`. As cores do tema ficam centralizadas em `styles/theme.css`, em variáveis CSS como `--color-pink`, `--color-sky` e `--color-text`.

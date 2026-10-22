@@ -19,6 +19,9 @@ export type Product = {
   icon: IconKey;
   tint: "pink" | "sky" | "gold";
   badge?: "Lançamento" | "Mais vendido" | "Últimas peças";
+  description?: string;
+  sizes?: string[];
+  image?: string;
 };
 
 export type Category = {
@@ -26,6 +29,8 @@ export type Category = {
   href: string;
   icon: IconKey;
 };
+
+export const PRODUCT_STORAGE_KEY = "biafashionkids.admin.products";
 
 const iconKeys: IconKey[] = [
   "dress",
@@ -45,7 +50,7 @@ function isIconKey(value: unknown): value is IconKey {
   return typeof value === "string" && iconKeys.some((iconKey) => iconKey === value);
 }
 
-function isProduct(value: unknown): value is Product {
+export function isProduct(value: unknown): value is Product {
   return (
     isRecord(value) &&
     typeof value.id === "string" &&
@@ -60,7 +65,12 @@ function isProduct(value: unknown): value is Product {
     ["pink", "sky", "gold"].includes(value.tint) &&
     (value.badge === undefined ||
       (typeof value.badge === "string" &&
-        ["Lançamento", "Mais vendido", "Últimas peças"].includes(value.badge)))
+        ["Lançamento", "Mais vendido", "Últimas peças"].includes(value.badge))) &&
+    (value.description === undefined || typeof value.description === "string") &&
+    (value.sizes === undefined ||
+      (Array.isArray(value.sizes) && value.sizes.every((size) => typeof size === "string"))) &&
+    (value.image === undefined ||
+      (typeof value.image === "string" && value.image.startsWith("data:image/")))
   );
 }
 

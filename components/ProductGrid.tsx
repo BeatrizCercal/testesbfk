@@ -4,10 +4,12 @@ import { useEffect, useMemo, useState } from "react";
 import { isProduct, products as initialProducts, PRODUCT_STORAGE_KEY, type Product } from "@/data/products";
 import { ProductCard } from "./ProductCard";
 
-const tabs: Array<Product["category"] | "Todos"> = ["Todos", "Menina", "Menino", "Bebê"];
+type ProductTab = "Todos" | "Calçados" | "Acessórios";
+
+const tabs: ProductTab[] = ["Todos", "Calçados", "Acessórios"];
 
 export function ProductGrid() {
-  const [active, setActive] = useState<(typeof tabs)[number]>("Todos");
+  const [active, setActive] = useState<ProductTab>("Todos");
   const [products, setProducts] = useState<Product[]>(initialProducts);
   const [catalogMessage, setCatalogMessage] = useState("");
 
@@ -28,7 +30,11 @@ export function ProductGrid() {
   }, []);
 
   const filtered = useMemo(
-    () => (active === "Todos" ? products : products.filter((p) => p.category === active)),
+    () => {
+      if (active === "Todos") return products;
+      const icon = active === "Calçados" ? "shoe" : "accessory";
+      return products.filter((product) => product.icon === icon);
+    },
     [active, products]
   );
 
@@ -36,9 +42,9 @@ export function ProductGrid() {
     <section id="produtos" className="mx-auto max-w-7xl px-4 py-12 sm:py-16" aria-labelledby="produtos-heading">
       <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <p className="text-sm font-bold uppercase tracking-widest text-brand-pink-500">Selecionadinhos pra você</p>
+          <p className="text-sm font-bold uppercase tracking-widest text-brand-pink-500">Calçados e acessórios</p>
           <h2 id="produtos-heading" className="font-display text-2xl font-bold text-brand-ink sm:text-3xl">
-            Novidades da semana
+            Produtos em destaque
           </h2>
         </div>
 

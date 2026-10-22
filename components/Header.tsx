@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { CART_UPDATED_EVENT, getCartCount, readCart } from "@/data/cart";
 import { CategoryNav } from "./CategoryNav";
 
 function SearchIcon({ size = 20 }: { size?: number }) {
@@ -80,9 +81,29 @@ function AdminIcon({ size = 18 }: { size?: number }) {
 }
 
 export function Header() {
-  const [cartCount] = useState(0);
+  const [cartCount, setCartCount] = useState<number | null>(0);
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const updateCartCount = () => {
+      try {
+        setCartCount(getCartCount(readCart()));
+      } catch {
+        setCartCount(null);
+      }
+    };
+
+    updateCartCount();
+    window.addEventListener(CART_UPDATED_EVENT, updateCartCount);
+    window.addEventListener("storage", updateCartCount);
+    return () => {
+      window.removeEventListener(CART_UPDATED_EVENT, updateCartCount);
+      window.removeEventListener("storage", updateCartCount);
+    };
+  }, []);
+
+  const cartCountLabel = cartCount === null ? "!" : cartCount;
 
   return (
     <header className="sticky top-0 z-50 bg-white shadow-sm">
@@ -149,10 +170,10 @@ export function Header() {
               <Link href="/entrar" aria-label="Entrar ou cadastrar-se">
                 <UserIcon size={26} />
               </Link>
-              <Link href="/carrinho" className="relative" aria-label={`Carrinho, ${cartCount} itens`}>
+              <Link href="/carrinho" className="relative" aria-label={`Carrinho, ${cartCountLabel} itens`}>
                 <CartIcon size={26} />
                 <span className="absolute -right-1.5 -top-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-brand-pink-500 text-[10px] font-bold text-white">
-                  {cartCount}
+                  {cartCountLabel}
                 </span>
               </Link>
             </div>
@@ -227,22 +248,22 @@ export function Header() {
           <Link
             href="/carrinho"
             className="flex items-center gap-2 text-gray-700"
-            aria-label={`Carrinho, ${cartCount} itens`}
+            aria-label={`Carrinho, ${cartCountLabel} itens`}
           >
             <span className="relative shrink-0">
               <CartIcon />
               <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-brand-pink-100 text-[11px] font-bold text-brand-pink-600 lg:hidden">
-                {cartCount}
+                {cartCountLabel}
               </span>
             </span>
             <span className="hidden text-base leading-tight lg:block">
               <span className="flex items-center gap-1.5">
                 <span className="font-bold text-black">Minha Sacola</span>
                 <span className="flex h-6 w-6 items-center justify-center rounded-full bg-brand-pink-100 text-xs font-bold text-brand-pink-600">
-                  {cartCount}
+                  {cartCountLabel}
                 </span>
               </span>
-              R$ 0,00
+              {cartCount === null ? "Confira sua sacola" : "Veja sua sacola"}
             </span>
           </Link>
         </div>

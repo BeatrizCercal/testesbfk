@@ -1,6 +1,7 @@
 import { Header } from "@/components/Header";
 import { HeroCarousel } from "@/components/HeroCarousel";
 import { BenefitsBar } from "@/components/BenefitsBar";
+import { ProductGrid } from "@/components/ProductGrid";
 import { BrandsCarousel } from "@/components/BrandsCarousel";
 import { PijamasPromo } from "@/components/PijamasPromo";
 import { StoreOutletBanners } from "@/components/StoreOutletBanners";
@@ -17,6 +18,9 @@ export default function Home() {
         </div>
         <div className="animate-fadeIn" style={{ animationDelay: "150ms" }}>
           <BenefitsBar />
+        </div>
+        <div className="animate-fadeIn" style={{ animationDelay: "225ms" }}>
+          <ProductGrid />
         </div>
         <div className="animate-fadeIn" style={{ animationDelay: "300ms" }}>
           <BrandsCarousel />

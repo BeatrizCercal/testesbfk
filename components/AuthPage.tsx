@@ -42,42 +42,31 @@ export function AuthPage({ mode }: AuthPageProps) {
   };
 
   return (
-    <main className="min-h-[calc(100vh-88px)] bg-brand-cream px-4 py-8 sm:px-6 sm:py-12">
-      <div className="mx-auto grid max-w-6xl overflow-hidden rounded-xl2 bg-white shadow-card lg:grid-cols-[0.9fr_1.1fr]">
-        <aside className="relative hidden overflow-hidden bg-brand-pink-500 p-10 text-white lg:flex lg:flex-col lg:justify-between">
-          <div className="absolute -right-20 top-16 h-64 w-64 rounded-full border-[28px] border-white/10" />
-          <div className="absolute -bottom-24 -left-20 h-72 w-72 rounded-full border-[34px] border-brand-sky-400/60" />
-          <div className="relative z-10">
-            <Link href="/" aria-label="Voltar para a página inicial">
+    <main className={`auth-page auth-page--${mode}`}>
+      <div className="auth-shell">
+        <aside className="auth-promo">
+          <div className="auth-promo__content">
+            <Link href="/" className="auth-logo-link" aria-label="Voltar para a página inicial">
               <Image
                 src="/logo/biafashionkids-logo.jpg"
                 alt="Bia Fashion Kids"
                 width={74}
                 height={74}
-                className="h-[74px] w-[74px] rounded-full border-4 border-white object-cover"
+                className="auth-logo"
               />
             </Link>
-            <p className="mt-12 max-w-xs text-sm font-bold uppercase tracking-[0.24em] text-brand-sky-100">
-              Bia Fashion Kids
-            </p>
-            <p className="mt-4 max-w-sm text-3xl font-bold leading-tight text-white">
-              Desde 2014, do bebê ao juvenil!
-            </p>
           </div>
-          <p className="relative z-10 max-w-xs text-sm leading-6 text-white/80">
-            Moda infantil escolhida para acompanhar cada fase com conforto e estilo.
-          </p>
         </aside>
 
-        <section className="px-5 py-8 sm:px-12 sm:py-12 lg:px-16">
-          <div className="mx-auto max-w-md">
-            <Link href="/" className="mb-8 inline-flex items-center gap-2 text-sm font-bold text-brand-ink lg:hidden">
+        <section className="auth-card">
+          <div className="auth-card__content">
+            <Link href="/" className="auth-back-link">
               <span aria-hidden="true">←</span>
               Voltar para a loja
             </Link>
-            <p className="text-sm font-bold uppercase tracking-[0.2em] text-brand-pink-500">{text.eyebrow}</p>
-            <h1 className="mt-3 text-3xl font-bold leading-tight text-brand-ink sm:text-4xl">{text.title}</h1>
-            <p className="mt-4 max-w-lg leading-6 text-brand-ink/65">{text.description}</p>
+            <span className="auth-card__eyebrow">{text.eyebrow}</span>
+            <h1>{text.title}</h1>
+            <p className="auth-card__description">{text.description}</p>
 
             <form className="mt-8 space-y-5" onSubmit={handleSubmit}>
               {!isLogin && (
@@ -162,8 +151,8 @@ export function AuthPage({ mode }: AuthPageProps) {
               )}
 
               {isLogin ? (
-                <div className="flex justify-end">
-                  <Link href="#" className="text-sm font-bold text-brand-pink-600 transition hover:text-brand-pink-800">
+                <div className="auth-forgot">
+                  <Link href="#">
                     Esqueci minha senha
                   </Link>
                 </div>
@@ -179,31 +168,28 @@ export function AuthPage({ mode }: AuthPageProps) {
 
               <button
                 type="submit"
-                className="w-full rounded-lg bg-brand-pink-500 px-5 py-3.5 font-bold text-white shadow-soft transition hover:bg-brand-pink-600"
+                className="auth-submit"
               >
                 {text.submit}
               </button>
 
               {submitted && (
-                <p role="status" className="rounded-lg bg-brand-sky-100 px-4 py-3 text-sm font-medium text-brand-ink">
+                <p role="status" className="auth-feedback">
                   Formulário pronto. A integração com a conta será conectada na próxima etapa.
                 </p>
               )}
             </form>
 
-            <p className="mt-8 text-center text-sm text-brand-ink/65">
+            <p className="auth-alternate">
               {text.alternate}{" "}
-              <Link href={text.alternateHref} className="font-bold text-brand-pink-600 hover:text-brand-pink-800">
+              <Link href={text.alternateHref}>
                 {text.alternateAction}
               </Link>
             </p>
             {isLogin && (
-              <div className="mt-6 border-t border-brand-ink/10 pt-5 text-center">
-                <p className="text-sm text-brand-ink/65">Acesso da equipe da loja</p>
-                <Link
-                  href="/admin"
-                  className="mt-2 inline-flex font-bold text-brand-sky-600 transition hover:text-brand-pink-600"
-                >
+              <div className="auth-admin">
+                <p>Acesso da equipe da loja</p>
+                <Link href="/admin">
                   Acessar painel administrativo
                 </Link>
               </div>

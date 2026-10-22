@@ -22,7 +22,7 @@ const content = {
   },
   signup: {
     eyebrow: "Crie sua conta",
-    title: "Tudo pronto para descobrir os looks mais lindos",
+    title: "Do bebê ao juvenil, desde 2014!",
     description: "Cadastre-se para ter uma experiência mais prática na Bia Fashion Kids.",
     submit: "Criar minha conta",
     alternate: "Já tem uma conta?",
@@ -44,21 +44,16 @@ export function AuthPage({ mode }: AuthPageProps) {
   return (
     <main className={`auth-page auth-page--${mode}`}>
       <div className="auth-shell">
-        <aside className="auth-promo">
-          <div className="auth-promo__content">
-            <Link href="/" className="auth-logo-link" aria-label="Voltar para a página inicial">
-              <Image
-                src="/logo/biafashionkids-logo.jpg"
-                alt="Bia Fashion Kids"
-                width={74}
-                height={74}
-                className="auth-logo"
-              />
-            </Link>
-          </div>
-        </aside>
-
         <section className="auth-card">
+          <Link href="/" className="auth-logo-link" aria-label="Bia Fashion Kids - página inicial">
+            <Image
+              src="/logo/biafashionkids-logo.jpg"
+              alt="Bia Fashion Kids"
+              width={64}
+              height={64}
+              className="auth-logo"
+            />
+          </Link>
           <div className="auth-card__content">
             <Link href="/" className="auth-back-link">
               <span aria-hidden="true">←</span>

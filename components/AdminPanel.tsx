@@ -15,7 +15,7 @@ type Sale = {
   brand: string;
   items: number;
   total: number;
-  status: "Pago" | "Enviado" | "Aguardando pagamento";
+  status: "Pago" | "Enviado" | "Aguardando";
   date: string;
 };
 
@@ -29,7 +29,7 @@ const sales: Sale[] = [
 
 const categoryOptions = ["Menina", "Menino", "Bebê"] as const;
 const brandOptions = ["Todas as marcas", "Adidas", "Charpey", "Molekinha", "Nike", "Pimpolho"];
-const iconOptions: IconKey[] = ["Vestido", "Camisa", "Bermuda", "Sapato"];
+const iconOptions: IconKey[] = ["dress", "polo", "onesie", "shorts", "shoe", "jacket", "accessory"];
 
 function Icon({ name }: { name: "grid" | "box" | "bag" | "plus" | "arrow" | "trend" | "menu" | "close" }) {
   const paths = {

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FormEvent, useState } from "react";
+import { Blob, Cloud, Heart, Rainbow, Sparkle, Star } from "./decor/Shapes";
 
 type AuthMode = "login" | "signup";
 
@@ -43,6 +44,18 @@ export function AuthPage({ mode }: AuthPageProps) {
 
   return (
     <main className={`auth-page auth-page--${mode}`}>
+      {/* Elementos orgânicos, como na página inicial */}
+      <Blob className="auth-decor kids-float--slow kids-float" color="var(--color-pink-light)" style={{ width: 380, left: -140, top: -120 }} />
+      <Blob className="auth-decor kids-float" color="var(--color-sky-light)" style={{ width: 420, right: -160, bottom: -160 }} />
+      <Blob className="auth-decor kids-float kids-decor--desktop" color="#fffbd0" style={{ width: 160, right: "12%", top: 60 }} />
+      <Rainbow className="auth-decor kids-wiggle kids-decor--desktop" style={{ width: 120, left: "9%", bottom: "14%" }} />
+      <Cloud className="auth-decor kids-float kids-decor--desktop" style={{ width: 90, left: "16%", top: "18%" }} />
+      <Cloud className="auth-decor kids-float--slow kids-float kids-decor--desktop" style={{ width: 70, right: "18%", bottom: "20%" }} />
+      <Star className="auth-decor kids-twinkle" color="var(--color-yellow)" style={{ width: 30, left: "7%", top: "40%" }} />
+      <Star className="auth-decor kids-twinkle" color="var(--color-sky)" style={{ width: 22, right: "8%", top: "30%", animationDelay: "0.6s" }} />
+      <Sparkle className="auth-decor kids-twinkle" color="var(--color-pink)" style={{ width: 22, right: "26%", top: "10%", animationDelay: "1.2s" }} />
+      <Heart className="auth-decor kids-beat kids-decor--desktop" color="var(--color-pink)" style={{ width: 24, left: "24%", bottom: "10%" }} />
+
       <div className="auth-shell">
         <section className="auth-card">
           <Link href="/" className="auth-logo-link" aria-label="Bia Fashion Kids - página inicial">
@@ -59,14 +72,24 @@ export function AuthPage({ mode }: AuthPageProps) {
               <span aria-hidden="true">←</span>
               Voltar para a loja
             </Link>
+
+            <nav className="auth-switch" aria-label="Entrar ou criar conta">
+              <Link href="/entrar" aria-current={isLogin ? "page" : undefined}>
+                Entrar
+              </Link>
+              <Link href="/cadastrar-se" aria-current={!isLogin ? "page" : undefined}>
+                Criar conta
+              </Link>
+            </nav>
+
             <span className="auth-card__eyebrow">{text.eyebrow}</span>
             <h1>{text.title}</h1>
             <p className="auth-card__description">{text.description}</p>
 
-            <form className="mt-8 space-y-5" onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit}>
               {!isLogin && (
-                <div className="grid gap-5 sm:grid-cols-2">
-                  <label className="block text-sm font-bold text-brand-ink">
+                <div className="auth-row">
+                  <label className="auth-field">
                     Nome
                     <input
                       required
@@ -74,10 +97,9 @@ export function AuthPage({ mode }: AuthPageProps) {
                       type="text"
                       autoComplete="given-name"
                       placeholder="Seu nome"
-                      className="mt-2 w-full rounded-lg border border-brand-ink/15 bg-white px-4 py-3 font-normal outline-none transition placeholder:text-brand-ink/35 focus:border-brand-pink-500 focus:ring-2 focus:ring-brand-pink-100"
                     />
                   </label>
-                  <label className="block text-sm font-bold text-brand-ink">
+                  <label className="auth-field">
                     Sobrenome
                     <input
                       required
@@ -85,13 +107,12 @@ export function AuthPage({ mode }: AuthPageProps) {
                       type="text"
                       autoComplete="family-name"
                       placeholder="Seu sobrenome"
-                      className="mt-2 w-full rounded-lg border border-brand-ink/15 bg-white px-4 py-3 font-normal outline-none transition placeholder:text-brand-ink/35 focus:border-brand-pink-500 focus:ring-2 focus:ring-brand-pink-100"
                     />
                   </label>
                 </div>
               )}
 
-              <label className="block text-sm font-bold text-brand-ink">
+              <label className="auth-field">
                 E-mail
                 <input
                   required
@@ -99,12 +120,11 @@ export function AuthPage({ mode }: AuthPageProps) {
                   type="email"
                   autoComplete="email"
                   placeholder="voce@email.com"
-                  className="mt-2 w-full rounded-lg border border-brand-ink/15 bg-white px-4 py-3 font-normal outline-none transition placeholder:text-brand-ink/35 focus:border-brand-pink-500 focus:ring-2 focus:ring-brand-pink-100"
                 />
               </label>
 
               {!isLogin && (
-                <label className="block text-sm font-bold text-brand-ink">
+                <label className="auth-field">
                   Telefone
                   <input
                     required
@@ -112,12 +132,11 @@ export function AuthPage({ mode }: AuthPageProps) {
                     type="tel"
                     autoComplete="tel"
                     placeholder="(00) 00000-0000"
-                    className="mt-2 w-full rounded-lg border border-brand-ink/15 bg-white px-4 py-3 font-normal outline-none transition placeholder:text-brand-ink/35 focus:border-brand-pink-500 focus:ring-2 focus:ring-brand-pink-100"
                   />
                 </label>
               )}
 
-              <label className="block text-sm font-bold text-brand-ink">
+              <label className="auth-field">
                 Senha
                 <input
                   required
@@ -126,12 +145,11 @@ export function AuthPage({ mode }: AuthPageProps) {
                   minLength={6}
                   autoComplete={isLogin ? "current-password" : "new-password"}
                   placeholder="Digite sua senha"
-                  className="mt-2 w-full rounded-lg border border-brand-ink/15 bg-white px-4 py-3 font-normal outline-none transition placeholder:text-brand-ink/35 focus:border-brand-pink-500 focus:ring-2 focus:ring-brand-pink-100"
                 />
               </label>
 
               {!isLogin && (
-                <label className="block text-sm font-bold text-brand-ink">
+                <label className="auth-field">
                   Confirme sua senha
                   <input
                     required
@@ -140,7 +158,6 @@ export function AuthPage({ mode }: AuthPageProps) {
                     minLength={6}
                     autoComplete="new-password"
                     placeholder="Digite a senha novamente"
-                    className="mt-2 w-full rounded-lg border border-brand-ink/15 bg-white px-4 py-3 font-normal outline-none transition placeholder:text-brand-ink/35 focus:border-brand-pink-500 focus:ring-2 focus:ring-brand-pink-100"
                   />
                 </label>
               )}
@@ -152,11 +169,11 @@ export function AuthPage({ mode }: AuthPageProps) {
                   </Link>
                 </div>
               ) : (
-                <label className="flex items-start gap-3 text-sm leading-5 text-brand-ink/70">
-                  <input required type="checkbox" className="mt-1 h-4 w-4 accent-brand-pink-500" />
+                <label className="auth-terms">
+                  <input required type="checkbox" />
                   <span>
-                    Li e aceito os <Link href="#" className="font-bold text-brand-pink-600">termos de uso</Link> e a{" "}
-                    <Link href="#" className="font-bold text-brand-pink-600">política de privacidade</Link>.
+                    Li e aceito os <Link href="#" >termos de uso</Link> e a{" "}
+                    <Link href="#" >política de privacidade</Link>.
                   </span>
                 </label>
               )}

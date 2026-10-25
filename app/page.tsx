@@ -5,6 +5,7 @@ import { Reviews } from "@/components/Reviews";
 import { Footer } from "@/components/Footer";
 import { WaveDivider } from "@/components/decor/WaveDivider";
 import { PromoCalendar } from "@/components/PromoCalendar";
+import { ShapeCards } from "@/components/ShapeCards";
 
 const WHITE = "#ffffff";
 const PAGE_BG = "var(--color-background)";
@@ -16,6 +17,7 @@ export default function Home() {
       <Header />
       <main>
         <div className="animate-fadeIn">
+          <ShapeCards />
           <BrandsCarousel />
         </div>
         <div className="animate-fadeIn" style={{ animationDelay: "225ms" }}>

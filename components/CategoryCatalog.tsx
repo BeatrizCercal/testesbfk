@@ -70,9 +70,9 @@ export function CategoryCatalog({
                 role="tab"
                 aria-selected={active === tab}
                 onClick={() => selectTab(tab)}
-                className={`rounded-full px-5 py-2 text-sm font-bold transition ${
-                  active === tab ? "kids-tab kids-tab--active" : "kids-tab"
-                }`}
+                className={`rounded-full px-5 py-2 text-sm font-bold transition kids-tab ${
+                  tab === "Menino" ? "kids-tab--boy" : tab === "Menina" ? "kids-tab--girl" : ""
+                } ${active === tab ? "kids-tab--active" : ""}`}
               >
                 {tab}
               </button>

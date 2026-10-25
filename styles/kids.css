@@ -723,3 +723,37 @@ html {
 .kids-cal-panel__date::first-letter {
   text-transform: uppercase;
 }
+
+/* Abas Menino sempre azuis e Menina sempre rosa (Bebê, Calçados e onde houver) */
+[class*="kids-theme--"] .kids-tab--boy {
+  color: var(--color-sky-dark);
+  border-color: var(--color-sky-light);
+}
+
+[class*="kids-theme--"] .kids-tab--boy:hover {
+  border-color: var(--color-sky);
+}
+
+[class*="kids-theme--"] .kids-tab--girl {
+  color: var(--color-pink);
+  border-color: var(--color-pink-light);
+}
+
+[class*="kids-theme--"] .kids-tab--girl:hover {
+  border-color: #ee96bc;
+}
+
+[class*="kids-theme--"] .kids-tab--boy.kids-tab--active,
+[class*="kids-theme--"] .kids-tab--boy.kids-tab--active:hover {
+  background-color: var(--color-sky-dark);
+  border-color: var(--color-sky-dark);
+  color: #ffffff;
+}
+
+[class*="kids-theme--"] .kids-tab--girl.kids-tab--active,
+[class*="kids-theme--"] .kids-tab--girl.kids-tab--active:hover {
+  background-color: var(--color-pink);
+  border-color: var(--color-pink);
+  color: #ffffff;
+  box-shadow: 0 4px 14px -4px rgba(194, 87, 138, 0.45);
+}

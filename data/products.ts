@@ -9,10 +9,16 @@ export type IconKey =
   | "jacket"
   | "accessory";
 
+export type BabyGender = "Menino" | "Menina" | "Unissex";
+
+export const babyGenders: BabyGender[] = ["Menino", "Menina", "Unissex"];
+
 export type Product = {
   id: string;
   name: string;
   category: "Menina" | "Menino" | "Bebê";
+  /** Só para produtos de Bebê: separa menino, menina e unissex */
+  gender?: BabyGender;
   price: number;
   oldPrice?: number;
   installments: string;
@@ -57,6 +63,8 @@ export function isProduct(value: unknown): value is Product {
     typeof value.name === "string" &&
     typeof value.category === "string" &&
     ["Menina", "Menino", "Bebê"].includes(value.category) &&
+    (value.gender === undefined ||
+      (typeof value.gender === "string" && ["Menino", "Menina", "Unissex"].includes(value.gender))) &&
     typeof value.price === "number" &&
     (value.oldPrice === undefined || typeof value.oldPrice === "number") &&
     typeof value.installments === "string" &&
@@ -112,4 +120,30 @@ export const categories = readEntries(catalogData.categories, isCategory, "categ
 
 export function formatBRL(value: number): string {
   return value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+}
+
+/* ---------- Páginas de categoria ---------- */
+
+export type CategoryKey = "bebe" | "meninas" | "meninos" | "calcados" | "acessorios";
+
+/** Gênero usado nas subdivisões: Menino/Menina vêm do público; Bebê usa o campo gender */
+export function productGender(product: Product): BabyGender {
+  if (product.category === "Menino") return "Menino";
+  if (product.category === "Menina") return "Menina";
+  return product.gender ?? "Unissex";
+}
+
+export function productsForCategory(list: Product[], key: CategoryKey): Product[] {
+  switch (key) {
+    case "bebe":
+      return list.filter((product) => product.category === "Bebê");
+    case "meninas":
+      return list.filter((product) => product.category === "Menina");
+    case "meninos":
+      return list.filter((product) => product.category === "Menino");
+    case "calcados":
+      return list.filter((product) => product.icon === "shoe");
+    case "acessorios":
+      return list.filter((product) => product.icon === "accessory");
+  }
 }

@@ -43,7 +43,7 @@ export function CheckoutPageClient() {
           <section className="mt-8 rounded-2xl bg-white p-8 text-center">
             <p className="font-semibold text-brand-ink">Sua sacola está vazia.</p>
             <Link
-              href="/#produtos"
+              href="/"
               className="mt-5 inline-flex rounded-full bg-brand-pink-500 px-6 py-3 font-semibold text-white shadow-soft transition hover:bg-brand-pink-600"
             >
               Escolher produtos

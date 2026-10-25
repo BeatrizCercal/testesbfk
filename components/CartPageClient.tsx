@@ -64,7 +64,7 @@ export function CartPageClient() {
           <section className="flex min-h-[35vh] flex-col items-center justify-center gap-4 text-center">
             <p className="text-lg font-semibold text-brand-ink">Sua sacola está vazia.</p>
             <Link
-              href="/#produtos"
+              href="/"
               className="rounded-full bg-brand-pink-500 px-6 py-3 font-semibold text-white shadow-soft transition hover:bg-brand-pink-600"
             >
               Voltar a comprar
@@ -175,7 +175,7 @@ export function CartPageClient() {
                 Ir para pagamento
               </button>
               <Link
-                href="/#produtos"
+                href="/"
                 className="mt-4 block text-center text-sm font-semibold text-brand-sky-600 hover:underline"
               >
                 Continuar comprando

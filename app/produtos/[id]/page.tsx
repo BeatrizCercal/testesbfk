@@ -109,7 +109,7 @@ export default function ProductDetailsPage() {
       <Header />
       <main className="mx-auto min-h-[60vh] max-w-7xl px-4 py-8 sm:px-6 sm:py-12">
         <Link
-          href="/#produtos"
+          href="/"
           className="mb-6 inline-flex items-center gap-2 text-sm font-semibold text-brand-sky-600 transition hover:text-brand-pink-500"
         >
           <span aria-hidden="true">←</span> Voltar para os produtos
@@ -253,7 +253,7 @@ export default function ProductDetailsPage() {
               </p>
             )}
             <Link
-              href="/#produtos"
+              href="/"
               className="mt-2 rounded-full bg-brand-pink-500 px-6 py-3 font-semibold text-white shadow-soft transition hover:bg-brand-pink-600"
             >
               Ver produtos

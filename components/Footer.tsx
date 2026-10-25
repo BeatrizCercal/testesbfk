@@ -104,7 +104,9 @@ function FooterLinkItem({ link, className }: { link: FooterLink; className: stri
 const specialPages = [
   { name: "Meninas", href: "/categorias/meninas" },
   { name: "Meninos", href: "/categorias/meninos" },
-  { name: "Calçados", href: "#" },
+  { name: "Bebê", href: "/categorias/bebe" },
+  { name: "Calçados", href: "/categorias/calcados" },
+  { name: "Acessórios", href: "/categorias/acessorios" },
   { name: "Promoções", href: "#" },
   { name: "Outlet", href: "#" },
 ];

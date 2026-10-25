@@ -391,3 +391,151 @@ html {
   background-color: var(--color-sky-light);
   transform: translateY(-2px);
 }
+
+/* ---------- Temas das páginas de categoria ----------
+   boy  = azul | girl = rosa | mix = rosa + azul */
+
+.kids-theme--boy {
+  --kids-accent: var(--color-sky-dark);
+  --kids-accent-2: var(--color-sky);
+  --kids-soft: var(--color-sky-light);
+  --kids-hero-bg: linear-gradient(135deg, var(--color-sky-light) 0%, #ffffff 100%);
+}
+
+.kids-theme--girl {
+  --kids-accent: var(--color-pink);
+  --kids-accent-2: #ee96bc; /* = brand-pink-300 */
+  --kids-soft: var(--color-pink-light);
+  --kids-hero-bg: linear-gradient(135deg, var(--color-pink-light) 0%, #ffffff 100%);
+}
+
+.kids-theme--mix {
+  --kids-accent: var(--color-sky-dark);
+  --kids-accent-2: var(--color-pink);
+  --kids-soft: var(--color-sky-light);
+  --kids-hero-bg: linear-gradient(120deg, var(--color-pink-light) 0%, #ffffff 50%, var(--color-sky-light) 100%);
+}
+
+/* No tema misto os cards alternam azul e rosa */
+.kids-theme--mix .kids-card:nth-child(even) {
+  --kids-accent: var(--color-pink);
+  --kids-soft: var(--color-pink-light);
+}
+
+/* Cards, preço, botão e abas seguem o tema (azul por padrão na home) */
+.kids-price {
+  color: var(--kids-accent, var(--color-sky-dark));
+}
+
+.kids-card__buy {
+  background-color: var(--kids-accent, var(--color-sky-dark)) !important;
+}
+
+.kids-card__buy:hover {
+  filter: brightness(1.1);
+  background-color: var(--kids-accent, var(--color-sky-dark)) !important;
+}
+
+.kids-card {
+  border-color: var(--kids-soft, var(--color-sky-light));
+}
+
+.kids-card:hover,
+.kids-card:focus-within {
+  border-color: var(--kids-accent-2, var(--color-sky-medium));
+}
+
+[class*="kids-theme--"] .kids-tab {
+  background-color: #ffffff;
+  color: var(--kids-accent);
+  border: 2px solid var(--kids-soft);
+}
+
+[class*="kids-theme--"] .kids-tab:hover {
+  border-color: var(--kids-accent-2);
+}
+
+[class*="kids-theme--"] .kids-tab--active,
+[class*="kids-theme--"] .kids-tab--active:hover {
+  background-color: var(--kids-accent);
+  border-color: var(--kids-accent);
+  color: #ffffff;
+}
+
+.kids-theme--mix .kids-tab--active,
+.kids-theme--mix .kids-tab--active:hover {
+  background-image: linear-gradient(90deg, var(--color-pink), var(--color-sky-dark));
+  border-color: transparent;
+}
+
+/* Banner do topo da categoria */
+.kids-cat-hero {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: 2rem;
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  background: var(--kids-hero-bg);
+  border: 2px solid var(--kids-soft);
+}
+
+@media (min-width: 640px) {
+  .kids-cat-hero {
+    padding: 3.5rem 2rem;
+  }
+}
+
+.kids-cat-hero__title {
+  font-size: 2.25rem;
+  font-weight: 900;
+  line-height: 1.1;
+  color: var(--kids-accent);
+}
+
+@media (min-width: 640px) {
+  .kids-cat-hero__title {
+    font-size: 3.25rem;
+  }
+}
+
+.kids-theme--mix .kids-cat-hero__title {
+  background-image: linear-gradient(90deg, var(--color-pink), var(--color-sky-dark));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.kids-cat-hero__count {
+  margin-top: 0.75rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--kids-accent-2);
+}
+
+.kids-empty {
+  border-radius: 1.5rem;
+  border: 2px dashed var(--kids-soft);
+  background-color: #ffffff;
+  padding: 3rem 1.5rem;
+  text-align: center;
+  color: rgb(58 33 48 / 0.7);
+}
+
+/* ---------- Menu de categorias com cor por categoria ---------- */
+
+.kids-nav-link {
+  color: var(--nav-color);
+}
+
+@media (min-width: 768px) {
+  .kids-nav-link:hover,
+  .kids-nav-link[aria-current="page"] {
+    color: #ffffff;
+    background: var(--nav-fill);
+  }
+}
+
+.kids-nav-stripe {
+  background: var(--nav-fill);
+}

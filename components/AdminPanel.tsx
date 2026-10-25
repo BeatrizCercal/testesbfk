@@ -4,10 +4,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useState, type ChangeEvent, type FormEvent } from "react";
 import {
+  babyGenders,
   formatBRL,
   isProduct,
   products as initialProducts,
   PRODUCT_STORAGE_KEY,
+  type BabyGender,
   type IconKey,
   type Product,
 } from "@/data/products";
@@ -271,6 +273,7 @@ export function AdminPanel() {
     description: "",
     sizes: [] as string[],
     image: "",
+    gender: "Unissex" as BabyGender,
   });
   const [productSearch, setProductSearch] = useState("");
   const [sales, setSales] = useState<Sale[]>([]);
@@ -383,6 +386,7 @@ export function AdminPanel() {
         .replace(/[^a-z0-9]+/g, "-")}-${Date.now()}`,
       name: productForm.name.trim(),
       category: productForm.category,
+      ...(productForm.category === "Bebê" ? { gender: productForm.gender } : {}),
       price,
       installments: `2x de ${formatBRL(price / 2)}`,
       icon: productForm.icon,
@@ -394,7 +398,16 @@ export function AdminPanel() {
     };
 
     setProducts((current) => [newProduct, ...current]);
-    setProductForm({ name: "", category: "Menina", price: "", icon: "shoe", description: "", sizes: [], image: "" });
+    setProductForm({
+      name: "",
+      category: "Menina",
+      price: "",
+      icon: "shoe",
+      description: "",
+      sizes: [],
+      image: "",
+      gender: "Unissex",
+    });
     setProductMessage("Produto cadastrado com sucesso.");
   };
 
@@ -819,6 +832,20 @@ export function AdminPanel() {
                       />
                     </label>
                   </div>
+                  {productForm.category === "Bebê" && (
+                    <label>
+                      <span className="admin-field-label">Gênero do bebê</span>
+                      <select
+                        className="admin-input"
+                        value={productForm.gender}
+                        onChange={(event) =>
+                          setProductForm({ ...productForm, gender: event.target.value as BabyGender })
+                        }
+                      >
+                        {babyGenders.map((gender) => <option key={gender}>{gender}</option>)}
+                      </select>
+                    </label>
+                  )}
                   <label>
                     <span className="admin-field-label">Tipo de produto</span>
                     <select
@@ -936,7 +963,7 @@ export function AdminPanel() {
                       <span className="admin-product__info">
                         <strong>{product.name}</strong>
                         <small>
-                          {product.category} · {iconOptions.find((icon) => icon.value === product.icon)?.label}
+                          {product.category}{product.gender ? ` (${product.gender})` : ""} · {iconOptions.find((icon) => icon.value === product.icon)?.label}
                           {product.sizes?.length ? ` · Tamanhos ${product.sizes.join(", ")}` : ""}
                         </small>
                         {product.description && <small>{product.description}</small>}

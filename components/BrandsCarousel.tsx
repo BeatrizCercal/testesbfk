@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useRef } from "react";
+import { Sparkle, Squiggle } from "./decor/Shapes";
 
 type Brand = {
   id: string;
@@ -36,9 +37,13 @@ export function BrandsCarousel() {
     <section className="relative bg-white py-10" aria-label="Marcas">
       <div className="mx-auto max-w-7xl px-4 sm:px-8">
         <h2 className="text-center text-xl font-bold uppercase tracking-[0.3em] text-black sm:text-2xl">
-         As melhores marcas
+          <span className="kids-title">
+            <Sparkle className="kids-title__icon kids-twinkle" color="var(--color-sky)" />
+            As melhores marcas
+            <Sparkle className="kids-title__icon kids-twinkle" style={{ animationDelay: "1.2s" }} />
+          </span>
         </h2>
-        <div className="mx-auto mt-2 h-1 w-14 bg-black" />
+        <Squiggle className="kids-squiggle" />
       </div>
 
       <div className="relative mx-auto mt-8 max-w-7xl px-4 sm:px-8">

@@ -67,7 +67,7 @@ export function BenefitsBar() {
       </div>
 
       {/* Desktop: static row */}
-      <div className="mx-auto hidden max-w-7xl flex-wrap items-center justify-between gap-x-8 gap-y-4 px-4 py-6 sm:flex sm:px-8">
+      <div className="kids-benefits-row mx-auto hidden max-w-7xl flex-wrap items-center justify-between gap-x-8 gap-y-4 px-4 py-6 sm:flex sm:px-8">
         {benefits.map((b) => (
           <div key={b.title} className="flex items-center gap-3">
             <span className="shrink-0">{b.icon}</span>

@@ -1,0 +1,338 @@
+/* ==========================================================
+   Elementos decorativos infantis
+   Usa somente as cores definidas em styles/theme.css
+   ========================================================== */
+
+/* ---------- 1. Formas decorativas flutuantes ---------- */
+
+.kids-decor {
+  position: absolute;
+  pointer-events: none;
+  user-select: none;
+  z-index: -1;
+}
+
+.kids-float {
+  animation: kids-float 6s ease-in-out infinite;
+}
+
+.kids-float--slow {
+  animation-duration: 9s;
+}
+
+.kids-twinkle {
+  animation: kids-twinkle 2.8s ease-in-out infinite;
+}
+
+.kids-wiggle {
+  animation: kids-wiggle 4s ease-in-out infinite;
+}
+
+@keyframes kids-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(4deg);
+  }
+}
+
+@keyframes kids-twinkle {
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(0.7) rotate(20deg);
+    opacity: 0.6;
+  }
+}
+
+@keyframes kids-wiggle {
+  0%,
+  100% {
+    transform: rotate(-6deg);
+  }
+  50% {
+    transform: rotate(6deg);
+  }
+}
+
+/* Moldura do hero: formas que "escapam" das bordas do carrossel */
+.kids-hero {
+  position: relative;
+  isolation: isolate;
+  overflow-x: clip;
+}
+
+.kids-hero .kids-badge {
+  right: 20px;
+  bottom: -56px;
+  width: 112px;
+  height: 112px;
+}
+
+/* Abre espaço à direita da barra de vantagens para o selo do hero */
+@media (min-width: 640px) {
+  .kids-benefits-row {
+    padding-right: 150px !important;
+  }
+}
+
+.kids-hero__frame {
+  position: relative;
+  z-index: 1;
+}
+
+.kids-hero .kids-decor {
+  z-index: 2;
+}
+
+/* Seções que recebem formas no fundo */
+.kids-section {
+  position: relative;
+  overflow-x: clip;
+  isolation: isolate;
+}
+
+/* ---------- 2. Selo giratório ---------- */
+
+.kids-badge {
+  position: absolute;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 128px;
+  height: 128px;
+  border-radius: 9999px;
+  background-color: var(--color-pink);
+  box-shadow: 0 10px 24px -8px rgba(194, 87, 138, 0.55);
+  transition: transform 0.3s ease;
+}
+
+.kids-badge:hover {
+  transform: scale(1.08) rotate(-6deg);
+}
+
+.kids-badge__ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  animation: kids-spin 14s linear infinite;
+}
+
+.kids-badge__ring text {
+  fill: #ffffff;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.kids-badge__center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 9999px;
+  border: 2px dashed rgba(255, 255, 255, 0.7);
+}
+
+.kids-badge__heart {
+  width: 26px;
+  height: 26px;
+  animation: kids-beat 1.6s ease-in-out infinite;
+}
+
+@keyframes kids-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes kids-beat {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  15% {
+    transform: scale(1.18);
+  }
+  30% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(1.12);
+  }
+}
+
+@media (max-width: 639px) {
+  .kids-badge {
+    width: 84px;
+    height: 84px;
+  }
+
+  .kids-badge__ring text {
+    font-size: 14px;
+  }
+
+  .kids-badge__center {
+    width: 34px;
+    height: 34px;
+  }
+
+  .kids-badge__heart {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+/* ---------- 3. Divisor ondulado ---------- */
+
+.kids-wave {
+  display: block;
+  line-height: 0;
+  margin-top: -1px;
+}
+
+.kids-wave svg {
+  display: block;
+  width: 100%;
+  height: 40px;
+}
+
+@media (min-width: 640px) {
+  .kids-wave svg {
+    height: 64px;
+  }
+}
+
+/* ---------- 4. Títulos decorados ---------- */
+
+.kids-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.kids-title__icon {
+  width: 1.4em;
+  height: 1.4em;
+  flex-shrink: 0;
+}
+
+.kids-title__doodle {
+  width: 2em;
+  height: 1.2em;
+  flex-shrink: 0;
+}
+
+.kids-squiggle {
+  display: block;
+  width: 96px;
+  height: 14px;
+  margin: 0.5rem auto 0;
+}
+
+/* ---------- 5. Cards de produto ---------- */
+
+.kids-card {
+  border-radius: 1.75rem;
+  padding: 0.6rem 0.6rem 1rem;
+  background-color: #ffffff;
+  box-shadow: 0 2px 0 rgba(90, 192, 227, 0.12);
+  border: 2px solid var(--color-sky-light);
+  transition:
+    transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+}
+
+.kids-card:hover,
+.kids-card:focus-within {
+  transform: translateY(-8px) rotate(-1deg);
+  border-color: var(--color-sky-medium);
+  box-shadow: 0 18px 30px -14px rgba(194, 87, 138, 0.35);
+}
+
+.kids-card:nth-child(even):hover,
+.kids-card:nth-child(even):focus-within {
+  transform: translateY(-8px) rotate(1deg);
+}
+
+.kids-card__media {
+  border-radius: 1.4rem;
+  overflow: hidden;
+}
+
+.kids-card__media img {
+  border-radius: 1.4rem;
+  transition: transform 0.5s ease;
+}
+
+.kids-card:hover .kids-card__media img {
+  transform: scale(1.05);
+}
+
+.kids-card__buy {
+  border-radius: 9999px !important;
+}
+
+.kids-fav {
+  position: absolute;
+  top: 0.65rem;
+  right: 0.65rem;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 9999px;
+  background-color: #ffffff;
+  color: var(--color-pink);
+  box-shadow: 0 4px 12px -4px rgba(194, 87, 138, 0.4);
+  transition: transform 0.2s ease;
+}
+
+.kids-fav:hover {
+  transform: scale(1.12);
+}
+
+.kids-fav svg {
+  width: 20px;
+  height: 20px;
+}
+
+.kids-fav[aria-pressed="true"] svg {
+  animation: kids-pop 0.4s ease;
+}
+
+@keyframes kids-pop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.35);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Esconde decorações marcadas como "só desktop" em telas pequenas
+   (fica no fim do arquivo para vencer outras regras de display) */
+@media (max-width: 639px) {
+  .kids-decor--desktop {
+    display: none !important;
+  }
+}
+
+.kids-beat {
+  animation: kids-beat 1.6s ease-in-out infinite;
+}

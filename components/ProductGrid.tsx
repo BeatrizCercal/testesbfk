@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { isProduct, products as initialProducts, PRODUCT_STORAGE_KEY, type Product } from "@/data/products";
 import { ProductCard } from "./ProductCard";
+import { Blob, Doodle, Sparkle, Star } from "./decor/Shapes";
 
 type ProductTab = "Todos" | "Calçados" | "Acessórios";
 
@@ -39,12 +40,31 @@ export function ProductGrid() {
   );
 
   return (
-    <section id="produtos" className="mx-auto max-w-7xl px-4 py-12 sm:py-16" aria-labelledby="produtos-heading">
+    <section id="produtos" className="kids-section" aria-labelledby="produtos-heading">
+      <Blob
+        className="kids-decor kids-float--slow kids-float kids-decor--desktop"
+        color="var(--color-sky-light)"
+        style={{ width: 260, left: -90, top: 40 }}
+      />
+      <Blob
+        className="kids-decor kids-float kids-decor--desktop"
+        color="var(--color-pink-light)"
+        style={{ width: 220, right: -70, bottom: 30 }}
+      />
+      <Sparkle className="kids-decor kids-twinkle" style={{ width: 20, right: "8%", top: 28 }} />
+      <Star
+        className="kids-decor kids-twinkle kids-decor--desktop"
+        color="var(--color-sky-medium)"
+        style={{ width: 24, left: "6%", bottom: 60, animationDelay: "1s" }}
+      />
+      <div className="mx-auto max-w-7xl px-4 py-12 sm:py-16">
       <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="text-sm font-bold uppercase tracking-widest text-brand-pink-500">Calçados e acessórios</p>
-          <h2 id="produtos-heading" className="font-display text-2xl font-bold text-brand-ink sm:text-3xl">
+          <h2 id="produtos-heading" className="kids-title font-display text-2xl font-bold text-brand-ink sm:text-3xl">
+            <Star className="kids-title__icon kids-wiggle" color="var(--color-sky)" />
             Produtos em destaque
+            <Doodle className="kids-title__doodle kids-decor--desktop" />
           </h2>
         </div>
 
@@ -74,6 +94,7 @@ export function ProductGrid() {
         ))}
       </div>
       {catalogMessage && <p role="status" className="mt-5 text-center text-sm text-brand-pink-600">{catalogMessage}</p>}
+      </div>
     </section>
   );
 }

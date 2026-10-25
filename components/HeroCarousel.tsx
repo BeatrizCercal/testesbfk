@@ -2,6 +2,8 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { Blob, Cloud, Rainbow, Sparkle, Star } from "./decor/Shapes";
+import { SpinningBadge } from "./decor/SpinningBadge";
 
 type Slide = {
   id: string;
@@ -60,10 +62,11 @@ export function HeroCarousel() {
   };
 
   return (
+    <div className="kids-hero">
     <section
       aria-roledescription="carousel"
       aria-label="Destaques Bia Fashion Kids"
-      className="relative overflow-hidden"
+      className="kids-hero__frame relative overflow-hidden"
       onMouseEnter={pause}
       onMouseLeave={resume}
     >
@@ -139,5 +142,37 @@ export function HeroCarousel() {
         </>
       )}
     </section>
+
+      {/* Decorações infantis ao redor do carrossel */}
+      <Blob
+        className="kids-decor kids-float--slow kids-float kids-decor--desktop"
+        color="var(--color-pink-light)"
+        style={{ width: 150, left: -50, bottom: -50, opacity: 0.95 }}
+      />
+      <Blob
+        className="kids-decor kids-float kids-decor--desktop"
+        color="var(--color-sky-medium)"
+        style={{ width: 110, right: -36, top: -40, opacity: 0.9 }}
+      />
+      <Rainbow
+        className="kids-decor kids-wiggle kids-decor--desktop"
+        style={{ width: 96, left: 24, top: 18 }}
+      />
+      <Cloud className="kids-decor kids-float kids-decor--desktop" style={{ width: 70, left: "38%", top: 14 }} />
+      <Star className="kids-decor kids-twinkle" color="var(--color-sky)" style={{ width: 22, left: 14, bottom: 18 }} />
+      <Sparkle className="kids-decor kids-twinkle" style={{ width: 18, right: 18, bottom: 26, animationDelay: "0.8s" }} />
+      <Sparkle
+        className="kids-decor kids-twinkle kids-decor--desktop"
+        color="var(--color-sky-medium)"
+        style={{ width: 26, left: "24%", bottom: 40, animationDelay: "1.4s" }}
+      />
+      <Star
+        className="kids-decor kids-twinkle kids-decor--desktop"
+        color="var(--color-pink)"
+        style={{ width: 20, right: "30%", top: 24, animationDelay: "0.4s" }}
+      />
+
+      <SpinningBadge className="kids-decor--desktop" />
+    </div>
   );
 }

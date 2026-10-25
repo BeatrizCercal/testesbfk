@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { Heart, Squiggle } from "./decor/Shapes";
 
 function StarIcon() {
   return (
@@ -116,10 +117,16 @@ export function Reviews() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <section className="bg-white py-12" aria-label="Avaliações de clientes">
+    <section className="py-12" style={{ backgroundColor: "var(--color-pink-light)" }} aria-label="Avaliações de clientes">
       <div className="mx-auto max-w-7xl px-4 sm:px-8">
-        <h2 className="text-center text-xl font-bold uppercase tracking-[0.3em] text-black sm:text-2xl">Avaliações</h2>
-        <div className="mx-auto mt-2 h-1 w-14 bg-black" />
+        <h2 className="text-center text-xl font-bold uppercase tracking-[0.3em] text-black sm:text-2xl">
+          <span className="kids-title">
+            <Heart className="kids-title__icon kids-beat" />
+            Avaliações
+            <Heart className="kids-title__icon kids-beat" color="var(--color-sky)" />
+          </span>
+        </h2>
+        <Squiggle className="kids-squiggle" color="var(--color-pink)" />
       </div>
 
       <div className="mx-auto mt-8 max-w-7xl overflow-hidden px-4 sm:px-8">

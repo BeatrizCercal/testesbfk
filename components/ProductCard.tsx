@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { formatBRL, type Product } from "@/data/products";
@@ -11,9 +12,28 @@ const badgeStyle: Record<NonNullable<Product["badge"]>, string> = {
 };
 
 export function ProductCard({ product }: { product: Product }) {
+  const [favorite, setFavorite] = useState(false);
+
   return (
-    <article className="flex flex-col bg-white">
-      <div className="relative flex aspect-square items-center justify-center rounded-lg bg-[#F6F6F6]">
+    <article className="kids-card flex flex-col bg-white">
+      <div className="kids-card__media relative flex aspect-square items-center justify-center rounded-lg bg-[#F6F6F6]">
+        <button
+          type="button"
+          className="kids-fav"
+          aria-pressed={favorite}
+          aria-label={favorite ? `Remover ${product.name} dos favoritos` : `Adicionar ${product.name} aos favoritos`}
+          onClick={() => setFavorite((f) => !f)}
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path
+              d="M12 20.5s-7.2-4.4-9.2-8.9C1.4 8.3 3.4 4.8 6.8 4.5c1.9-.2 3.7.8 5.2 2.6 1.5-1.8 3.3-2.8 5.2-2.6 3.4.3 5.4 3.8 4 7.1-2 4.5-9.2 8.9-9.2 8.9Z"
+              fill={favorite ? "currentColor" : "none"}
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </button>
         {product.image && product.badge && (
           <span
             className={`absolute left-3 top-3 rounded-full px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-wide ${badgeStyle[product.badge]}`}
@@ -55,7 +75,7 @@ export function ProductCard({ product }: { product: Product }) {
         <div className="mt-5">
           <Link
             href={`/produtos/${encodeURIComponent(product.id)}`}
-            className="flex h-11 w-full items-center justify-center rounded-lg bg-brand-pink-300 text-sm font-bold text-white transition hover:bg-brand-pink-400"
+            className="kids-card__buy flex h-11 w-full items-center justify-center rounded-lg bg-brand-pink-300 text-sm font-bold text-white transition hover:bg-brand-pink-400"
           >
             Comprar
           </Link>

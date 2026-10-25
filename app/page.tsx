@@ -1,5 +1,4 @@
 import { Header } from "@/components/Header";
-import { HeroCarousel } from "@/components/HeroCarousel";
 import { BenefitsBar } from "@/components/BenefitsBar";
 import { BrandsCarousel } from "@/components/BrandsCarousel";
 import { Reviews } from "@/components/Reviews";
@@ -16,10 +15,7 @@ export default function Home() {
     <>
       <Header />
       <main>
-        <div className="animate-fadeIn" style={{ position: "relative", zIndex: 2 }}>
-          <HeroCarousel />
-        </div>
-        <div className="animate-fadeIn" style={{ animationDelay: "150ms" }}>
+        <div className="animate-fadeIn">
           <BrandsCarousel />
         </div>
         <div className="animate-fadeIn" style={{ animationDelay: "225ms" }}>

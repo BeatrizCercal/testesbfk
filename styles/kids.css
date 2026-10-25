@@ -60,129 +60,11 @@
   }
 }
 
-/* Moldura do hero: formas que "escapam" das bordas do carrossel */
-.kids-hero {
-  position: relative;
-  isolation: isolate;
-  overflow-x: clip;
-}
-
-.kids-hero .kids-badge {
-  right: 20px;
-  bottom: -56px;
-  width: 112px;
-  height: 112px;
-}
-
-.kids-hero__frame {
-  position: relative;
-  z-index: 1;
-}
-
-.kids-hero .kids-decor {
-  z-index: 2;
-}
-
 /* Seções que recebem formas no fundo */
 .kids-section {
   position: relative;
   overflow-x: clip;
   isolation: isolate;
-}
-
-/* ---------- 2. Selo giratório ---------- */
-
-.kids-badge {
-  position: absolute;
-  z-index: 3;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 128px;
-  height: 128px;
-  border-radius: 9999px;
-  background-color: var(--color-pink);
-  box-shadow: 0 10px 24px -8px rgba(194, 87, 138, 0.55);
-  transition: transform 0.3s ease;
-}
-
-.kids-badge:hover {
-  transform: scale(1.08) rotate(-6deg);
-}
-
-.kids-badge__ring {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  animation: kids-spin 14s linear infinite;
-}
-
-.kids-badge__ring text {
-  fill: #ffffff;
-  font-size: 13px;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.kids-badge__center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 52px;
-  height: 52px;
-  border-radius: 9999px;
-  border: 2px dashed rgba(255, 255, 255, 0.7);
-}
-
-.kids-badge__heart {
-  width: 26px;
-  height: 26px;
-  animation: kids-beat 1.6s ease-in-out infinite;
-}
-
-@keyframes kids-spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes kids-beat {
-  0%,
-  100% {
-    transform: scale(1);
-  }
-  15% {
-    transform: scale(1.18);
-  }
-  30% {
-    transform: scale(1);
-  }
-  45% {
-    transform: scale(1.12);
-  }
-}
-
-@media (max-width: 639px) {
-  .kids-badge {
-    width: 84px;
-    height: 84px;
-  }
-
-  .kids-badge__ring text {
-    font-size: 14px;
-  }
-
-  .kids-badge__center {
-    width: 34px;
-    height: 34px;
-  }
-
-  .kids-badge__heart {
-    width: 18px;
-    height: 18px;
-  }
 }
 
 /* ---------- 3. Divisor ondulado ---------- */
@@ -756,4 +638,20 @@ html {
   border-color: var(--color-pink);
   color: #ffffff;
   box-shadow: 0 4px 14px -4px rgba(194, 87, 138, 0.45);
+}
+
+@keyframes kids-beat {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  15% {
+    transform: scale(1.18);
+  }
+  30% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(1.12);
+  }
 }

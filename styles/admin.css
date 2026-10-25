@@ -10,7 +10,7 @@
   min-height: 100vh;
   background: var(--color-background, #f2fbfe);
   color: var(--admin-ink);
-  font-family: var(--font-roboto), system-ui, sans-serif;
+  font-family: var(--font-body), system-ui, sans-serif;
 }
 
 .admin *,

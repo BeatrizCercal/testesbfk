@@ -1795,7 +1795,7 @@ video {
 }
 
 .font-display {
-  font-family: var(--font-roboto), system-ui, sans-serif;
+  font-family: var(--font-body), system-ui, sans-serif;
 }
 
 .text-2xl {
@@ -2181,7 +2181,7 @@ html {
 body {
   --tw-bg-opacity: 1;
   background-color: rgb(242 251 254 / var(--tw-bg-opacity, 1));
-  font-family: var(--font-roboto), system-ui, sans-serif;
+  font-family: var(--font-body), system-ui, sans-serif;
   --tw-text-opacity: 1;
   color: rgb(58 33 48 / var(--tw-text-opacity, 1));
   -webkit-font-smoothing: antialiased;
@@ -2191,7 +2191,7 @@ body {
 h1,
 h2,
 h3 {
-  font-family: var(--font-roboto), system-ui, sans-serif;
+  font-family: var(--font-body), system-ui, sans-serif;
 }
 
 /* Visible keyboard focus, kept brand-consistent */

@@ -14,6 +14,7 @@ import {
   type Product,
 } from "@/data/products";
 import { AdminPromos } from "./AdminPromos";
+import { Blob, Cloud, Heart, Rainbow, Sparkle, Star } from "./decor/Shapes";
 
 type AdminView = "dashboard" | "products" | "sales" | "promos";
 type PeriodMode = "day" | "month" | "year";
@@ -574,7 +575,13 @@ export function AdminPanel() {
     <div className="admin">
       <aside className={`admin-sidebar${mobileMenuOpen ? " admin-sidebar--open" : ""}`}>
         <div className="admin-brand">
-          <span className="admin-brand__mark">B</span>
+          <Image
+            className="admin-brand__logo"
+            src="/logo/biafashionkids-logo.jpg"
+            alt=""
+            width={48}
+            height={48}
+          />
           <span>
             <strong>Bia Fashion Kids</strong>
             <small>Painel da loja</small>
@@ -604,8 +611,12 @@ export function AdminPanel() {
           ))}
         </nav>
 
+        <Blob className="admin-decor kids-float--slow kids-float" color="var(--color-sky-light)" style={{ width: 200, left: -70, bottom: 40 }} />
+        <Star className="admin-decor kids-twinkle" color="var(--color-yellow)" style={{ width: 22, right: 28, bottom: 150 }} />
+        <Heart className="admin-decor kids-beat" color="var(--color-pink)" style={{ width: 16, left: 34, bottom: 120 }} />
+
         <Link className="admin-back-link" href="/">
-          Voltar para a loja
+          <span aria-hidden="true">←</span> Voltar para a loja
         </Link>
       </aside>
 
@@ -652,6 +663,11 @@ export function AdminPanel() {
           {view === "dashboard" && (
             <>
               <section className="admin-welcome">
+                <Blob className="admin-decor kids-float--slow kids-float" color="var(--color-pink-light)" style={{ width: 260, right: -60, top: -110 }} />
+                <Blob className="admin-decor kids-float kids-decor--desktop" color="#fffbd0" style={{ width: 120, right: "30%", bottom: -60 }} />
+                <Rainbow className="admin-decor kids-wiggle kids-decor--desktop" style={{ width: 92, right: "38%", top: 18 }} />
+                <Cloud className="admin-decor kids-float kids-decor--desktop" style={{ width: 60, right: "22%", top: 22 }} />
+                <Sparkle className="admin-decor kids-twinkle" color="var(--color-sky)" style={{ width: 18, left: "45%", bottom: 22 }} />
                 <div>
                   <p className="admin-eyebrow">Resumo da loja</p>
                   <h2>Olá!</h2>
@@ -674,6 +690,7 @@ export function AdminPanel() {
                 {renderMetrics()}
               </section>
 
+              <div className="admin-dashboard-grid">
               <section className="admin-panel admin-risk-panel" aria-labelledby="risk-title">
                 <div className="admin-section-heading">
                   <div>
@@ -714,6 +731,7 @@ export function AdminPanel() {
                 </div>
                 {renderRecentSales(sortedRecentSales.slice(0, 5))}
               </section>
+              </div>
             </>
           )}
 
@@ -1008,9 +1026,11 @@ export function AdminPanel() {
 
           {view === "promos" && <AdminPromos />}
 
-          <p className="admin-demo-note">
-            Vendas de demonstração. Para consultar vendas reais, conecte este painel à plataforma da loja.
-          </p>
+          {(view === "dashboard" || view === "sales") && (
+            <p className="admin-demo-note">
+              Vendas de demonstração. Para consultar vendas reais, conecte este painel à plataforma da loja.
+            </p>
+          )}
         </main>
       </div>
     </div>

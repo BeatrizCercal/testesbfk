@@ -1,11 +1,20 @@
 import type { Metadata } from "next";
-import { Roboto } from "next/font/google";
+import { Fredoka, Nunito } from "next/font/google";
 import "./globals.css";
 
-const roboto = Roboto({
+/** Títulos, preços, botões e menu: arredondada e divertida */
+const fredoka = Fredoka({
   subsets: ["latin"],
-  weight: ["400", "500", "700", "900"],
-  variable: "--font-roboto",
+  weight: ["500", "600", "700"],
+  variable: "--font-title",
+  display: "swap",
+});
+
+/** Textos corridos: arredondada e bem legível */
+const nunito = Nunito({
+  subsets: ["latin"],
+  weight: ["400", "600", "700", "800", "900"],
+  variable: "--font-body",
   display: "swap",
 });
 
@@ -31,7 +40,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className={roboto.variable}>
+    <html lang="pt-BR" className={`${fredoka.variable} ${nunito.variable}`}>
       <body>{children}</body>
     </html>
   );

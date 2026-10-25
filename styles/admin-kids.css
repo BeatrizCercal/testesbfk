@@ -1,0 +1,496 @@
+/* ==========================================================
+   Admin no padrão estético da loja
+   Cores sólidas (rosa, azul e o amarelo da logo), cantos
+   orgânicos, sombra amarela deslocada e formas decorativas.
+   Fica depois de admin.css e sobrescreve só o visual.
+   ========================================================== */
+
+.admin {
+  --admin-sky-dark: var(--color-sky-dark, #369cc0);
+  --admin-yellow: var(--color-yellow, #fef016);
+  --admin-pink-dark: var(--color-pink-dark, #a24372);
+  --admin-border: var(--color-sky-light, #e4f6fc);
+}
+
+.admin-decor {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ---------- Sidebar ---------- */
+
+.admin-sidebar {
+  overflow: hidden;
+  border-right: 2px solid var(--admin-border);
+  border-radius: 0 2.5rem 2.5rem 0;
+}
+
+.admin-sidebar > *:not(.admin-decor) {
+  position: relative;
+  z-index: 1;
+}
+
+.admin-brand__logo {
+  width: 48px;
+  height: 48px;
+  flex: 0 0 auto;
+  border: 3px solid var(--admin-pink);
+  border-radius: 9999px;
+  object-fit: cover;
+}
+
+.admin-brand strong {
+  font-weight: 900;
+  color: var(--admin-pink);
+}
+
+.admin-brand small {
+  color: var(--admin-sky-dark);
+}
+
+.admin-sidebar__label {
+  color: var(--admin-sky-dark);
+}
+
+.admin-nav__item {
+  border-radius: 9999px;
+  font-weight: 700;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.admin-nav__item:hover {
+  background: var(--admin-blue-soft);
+  color: var(--admin-sky-dark);
+  transform: translateX(3px);
+}
+
+.admin-nav__item--active,
+.admin-nav__item--active:hover {
+  background: var(--admin-pink);
+  color: #fff;
+  box-shadow: 4px 4px 0 var(--admin-yellow);
+  transform: none;
+}
+
+.admin-back-link {
+  border-radius: 9999px;
+  background: var(--admin-blue-soft);
+  color: var(--admin-sky-dark);
+  font-weight: 800;
+}
+
+.admin-back-link:hover {
+  background: var(--admin-sky-dark);
+  color: #fff;
+}
+
+/* ---------- Topo ---------- */
+
+.admin-header {
+  border-bottom: 2px solid var(--admin-border);
+}
+
+.admin-header h1 {
+  font-weight: 900;
+  color: var(--admin-sky-dark);
+}
+
+.admin-eyebrow {
+  color: var(--admin-pink);
+}
+
+.admin-user {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.admin-user__role {
+  margin-top: 4px;
+  border-radius: 9999px;
+  background: var(--admin-yellow);
+  padding: 2px 10px;
+  color: var(--admin-pink-dark);
+  font-weight: 800;
+}
+
+/* ---------- Boas-vindas ---------- */
+
+.admin-welcome {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border: 2px solid var(--admin-pink-soft);
+  border-radius: 2rem 2rem 2rem 5rem;
+  background: #fff;
+  padding: clamp(22px, 3vw, 34px) clamp(22px, 3.5vw, 40px);
+  box-shadow: 10px 10px 0 var(--admin-yellow);
+}
+
+.admin-welcome > *:not(.admin-decor) {
+  position: relative;
+  z-index: 1;
+}
+
+.admin-welcome .admin-decor {
+  z-index: 0;
+}
+
+.admin-welcome h2 {
+  font-weight: 900;
+  color: var(--admin-pink);
+}
+
+/* ---------- Painéis ---------- */
+
+.admin-panel {
+  border: 2px solid var(--admin-border);
+  border-radius: 1.75rem;
+  box-shadow: 0 14px 30px -24px rgb(54 156 192 / 0.6);
+}
+
+.admin-section-heading h2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 900;
+  color: var(--admin-sky-dark);
+}
+
+/* Bolinha orgânica antes de cada título */
+.admin-section-heading h2::before {
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+  border-radius: 63% 37% 54% 46% / 55% 48% 52% 45%;
+  background: var(--admin-pink);
+  content: "";
+}
+
+.admin-products-layout > .admin-panel:nth-child(even) .admin-section-heading h2::before,
+.admin-dashboard-grid > .admin-panel:nth-child(even) .admin-section-heading h2::before {
+  background: var(--admin-yellow);
+}
+
+/* Distribuição da visão geral: atenção + vendas lado a lado em telas largas */
+.admin-dashboard-grid {
+  display: grid;
+  gap: 22px;
+  align-items: start;
+}
+
+@media (min-width: 1280px) {
+  .admin-dashboard-grid {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.6fr);
+  }
+
+  .admin-dashboard-grid .admin-risk-item {
+    flex-wrap: wrap;
+    row-gap: 8px;
+  }
+
+  .admin-dashboard-grid .admin-risk-item__message {
+    flex-basis: 100%;
+  }
+
+  .admin-dashboard-grid .admin-risk-item__total {
+    margin-left: auto;
+  }
+}
+
+/* ---------- Campos e botões ---------- */
+
+.admin-field-label {
+  color: var(--admin-sky-dark);
+}
+
+.admin-input {
+  border: 2px solid var(--admin-border);
+  border-radius: 1rem;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.admin-input:focus {
+  border-color: var(--admin-pink);
+  box-shadow: 0 0 0 4px var(--admin-pink-soft);
+}
+
+select.admin-input,
+input.admin-input:not([type="date"]):not([type="month"]):not([type="number"]) {
+  border-radius: 9999px;
+}
+
+.admin-textarea {
+  border-radius: 1.25rem;
+}
+
+.admin-button {
+  border-radius: 9999px;
+  font-weight: 800;
+}
+
+.admin-button--pink {
+  background: var(--admin-pink);
+  box-shadow: 0 10px 20px -12px var(--admin-pink);
+}
+
+.admin-button--pink:hover {
+  background: var(--admin-pink-dark);
+}
+
+.admin-text-button {
+  border-radius: 9999px;
+  background: var(--admin-blue-soft);
+  padding: 6px 14px;
+  color: var(--admin-sky-dark);
+  font-weight: 800;
+}
+
+.admin-text-button:hover {
+  background: var(--admin-sky-dark);
+  color: #fff;
+  text-decoration: none;
+}
+
+/* ---------- Indicadores ---------- */
+
+.admin-metric {
+  border: 2px solid transparent;
+  border-radius: 1.5rem;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.admin-metric:hover {
+  transform: translateY(-4px) rotate(-0.6deg);
+}
+
+/* Cada indicador com um canto orgânico diferente */
+.admin-metric:nth-child(1) {
+  border-radius: 1.5rem 1.5rem 1.5rem 3.5rem;
+}
+
+.admin-metric:nth-child(2) {
+  border-radius: 3.5rem 1.5rem 1.5rem 1.5rem;
+}
+
+.admin-metric:nth-child(3) {
+  border-radius: 1.5rem 3.5rem 1.5rem 1.5rem;
+}
+
+.admin-metric:nth-child(4) {
+  border-radius: 1.5rem 1.5rem 3.5rem 1.5rem;
+}
+
+.admin-metric--pink {
+  border-color: var(--admin-pink-soft);
+  background: var(--admin-pink-soft);
+}
+
+.admin-metric--blue {
+  border-color: var(--admin-blue-soft);
+  background: var(--admin-blue-soft);
+}
+
+.admin-metric--pink .admin-metric__value {
+  color: var(--admin-pink);
+}
+
+.admin-metric--blue .admin-metric__value {
+  color: var(--admin-sky-dark);
+}
+
+.admin-metric__icon {
+  border-radius: 9999px;
+}
+
+.admin-metric--pink .admin-metric__icon {
+  background: var(--admin-pink);
+  color: #fff;
+}
+
+.admin-metric--blue .admin-metric__icon {
+  background: var(--admin-sky-dark);
+  color: #fff;
+}
+
+/* ---------- Pagamentos em atenção ---------- */
+
+.admin-risk-panel {
+  border-color: var(--admin-pink-soft);
+  background: #fff;
+}
+
+.admin-risk-panel .admin-section-heading h2 {
+  color: var(--admin-pink);
+}
+
+.admin-risk-panel .admin-section-heading h2::before {
+  background: var(--admin-yellow);
+}
+
+.admin-risk-total {
+  border: 0;
+  background: var(--admin-yellow);
+  color: var(--admin-pink-dark);
+}
+
+.admin-risk-item {
+  border: 2px solid var(--admin-pink-soft);
+  border-left: 6px solid var(--admin-pink);
+  border-radius: 1.25rem;
+}
+
+.admin-risk-clear {
+  border-radius: 1.25rem;
+}
+
+/* ---------- Tabela ---------- */
+
+.admin-table th {
+  background: var(--admin-blue-soft);
+  color: var(--admin-sky-dark);
+}
+
+.admin-table th:first-child {
+  border-radius: 9999px 0 0 9999px;
+}
+
+.admin-table th:last-child {
+  border-radius: 0 9999px 9999px 0;
+}
+
+.admin-table td {
+  border-bottom: 2px dashed var(--admin-border);
+}
+
+.admin-table tbody tr {
+  transition: background-color 0.15s ease;
+}
+
+.admin-table tbody tr:hover td {
+  background: #fbfeff;
+}
+
+.admin-status {
+  font-weight: 800;
+}
+
+/* ---------- Produtos ---------- */
+
+.admin-size-option span {
+  border: 2px solid var(--admin-border);
+  border-radius: 9999px;
+}
+
+.admin-size-option input:checked + span {
+  border-color: var(--admin-sky-dark);
+  background: var(--admin-sky-dark);
+  color: #fff;
+}
+
+.admin-photo-upload {
+  border: 2px dashed var(--admin-border);
+  border-radius: 1.5rem;
+}
+
+.admin-photo-upload:hover {
+  border-color: var(--admin-sky-dark);
+}
+
+.admin-photo-upload__icon {
+  border-radius: 9999px;
+  background: var(--admin-sky-dark);
+  color: #fff;
+}
+
+.admin-product {
+  border: 2px solid var(--admin-border);
+  border-left: 6px solid var(--admin-sky-dark);
+  border-radius: 1.25rem;
+}
+
+.admin-product:hover {
+  border-color: var(--admin-blue);
+  border-left-color: var(--admin-sky-dark);
+}
+
+.admin-product__mark,
+.admin-product__image {
+  border-radius: 9999px;
+}
+
+.admin-product__price {
+  color: var(--admin-sky-dark);
+  font-weight: 900;
+}
+
+.admin-icon-button {
+  border-radius: 9999px;
+}
+
+.admin-delete-button {
+  background: var(--admin-pink-soft);
+  color: var(--admin-pink);
+}
+
+.admin-delete-button:hover {
+  background: var(--admin-pink);
+  color: #fff;
+}
+
+.admin-empty,
+.admin-form-message {
+  border-radius: 1.25rem;
+}
+
+.admin-storage-note,
+.admin-demo-note {
+  color: #806b79;
+}
+
+/* ---------- Mobile ---------- */
+
+@media (max-width: 760px) {
+  .admin-sidebar {
+    border-radius: 0 2rem 2rem 0;
+  }
+
+  .admin-welcome {
+    border-radius: 1.75rem 1.75rem 1.75rem 3rem;
+    box-shadow: 6px 6px 0 var(--admin-yellow);
+  }
+
+  .admin-nav__item--active,
+  .admin-nav__item--active:hover {
+    box-shadow: 3px 3px 0 var(--admin-yellow);
+  }
+}
+
+/* admin.css tem ".admin button { font: inherit }", que anula fonte e peso dos botões;
+   o prefixo .admin dá a especificidade necessária */
+.admin .admin-nav__item,
+.admin .admin-button,
+.admin .admin-text-button,
+.admin .admin-back-link {
+  font-family: var(--font-title), var(--font-body), system-ui, sans-serif;
+  font-weight: 600;
+}
+
+.admin .admin-nav__item {
+  font-size: 15px;
+}
+
+/* Na coluna estreita, título do painel de atenção em cima e total embaixo */
+@media (min-width: 1280px) {
+  .admin-dashboard-grid .admin-risk-panel .admin-section-heading {
+    flex-direction: column;
+    gap: 12px;
+  }
+}

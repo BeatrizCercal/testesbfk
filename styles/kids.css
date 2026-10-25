@@ -1189,3 +1189,80 @@ html {
   font-weight: 800;
   color: var(--color-ink);
 }
+
+/* ---------- Tipografia ----------
+   Fredoka (--font-title): títulos, preços, botões, menu e números
+   Nunito  (--font-body):  textos corridos */
+
+body {
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+h1,
+h2,
+h3,
+.font-display,
+.kids-title,
+.kids-nav-link,
+.kids-price,
+.kids-card__buy,
+.kids-tab,
+.kids-cal__month,
+.kids-cal__day,
+.kids-cal-panel__date,
+.kids-promo__discount,
+.kids-promo__title,
+.kids-promo__cta,
+.kids-cart__title,
+.kids-cart__count,
+.kids-cart-item__name,
+.kids-cart-item__price,
+.kids-cart__summary-title,
+.kids-cart__row.is-total,
+.kids-cart__primary,
+.kids-stepper span,
+.kids-benefit p:first-child,
+.auth-card h1,
+.auth-switch a,
+.auth-submit,
+.auth-card__eyebrow,
+.admin-brand strong,
+.admin-header h1,
+.admin-welcome h2,
+.admin-section-heading h2,
+.admin-nav__item,
+.admin-metric__value,
+.admin-button,
+.admin-risk-total,
+.admin-product__price {
+  font-family: var(--font-title), var(--font-body), system-ui, sans-serif;
+  letter-spacing: 0;
+}
+
+/* Fredoka já é encorpada: pesos um pouco menores deixam os títulos mais macios */
+h1,
+h2,
+.kids-title,
+.kids-cart__title,
+.auth-card h1,
+.admin-header h1,
+.admin-welcome h2,
+.admin-section-heading h2 {
+  font-weight: 700;
+}
+
+/* Títulos com letras espaçadas (Marcas, Avaliações, Promoções do dia) */
+h2.uppercase {
+  letter-spacing: 0.18em;
+}
+
+/* Botões e menu na Fredoka ficam melhores no peso 600 */
+.kids-nav-link,
+.kids-card__buy,
+.kids-tab,
+.kids-promo__cta,
+.kids-cart__primary,
+.auth-switch a,
+.auth-submit {
+  font-weight: 600;
+}

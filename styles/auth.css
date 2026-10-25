@@ -17,7 +17,7 @@
   overflow: hidden;
   background-color: var(--color-background, #f2fbfe);
   color: var(--auth-ink);
-  font-family: var(--font-roboto), system-ui, sans-serif;
+  font-family: var(--font-body), system-ui, sans-serif;
 }
 
 /* Criar conta usa o azul como cor principal; login usa o rosa */

@@ -655,3 +655,22 @@ html {
     transform: scale(1.12);
   }
 }
+
+/* Abas Todos e Unissex no amarelo da logo (texto escuro para ficar legível) */
+[class*="kids-theme--"] .kids-tab--yellow {
+  color: var(--color-ink);
+  border-color: var(--color-yellow);
+}
+
+[class*="kids-theme--"] .kids-tab--yellow:hover {
+  background-color: #fffbd0;
+  border-color: var(--color-yellow);
+}
+
+[class*="kids-theme--"] .kids-tab--yellow.kids-tab--active,
+[class*="kids-theme--"] .kids-tab--yellow.kids-tab--active:hover {
+  background-color: var(--color-yellow);
+  border-color: var(--color-yellow);
+  color: var(--color-ink);
+  box-shadow: 0 4px 14px -4px rgba(180, 168, 0, 0.45);
+}

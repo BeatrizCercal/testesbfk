@@ -71,7 +71,7 @@ export function CategoryCatalog({
                 aria-selected={active === tab}
                 onClick={() => selectTab(tab)}
                 className={`rounded-full px-5 py-2 text-sm font-bold transition kids-tab ${
-                  tab === "Menino" ? "kids-tab--boy" : tab === "Menina" ? "kids-tab--girl" : ""
+                  tab === "Menino" ? "kids-tab--boy" : tab === "Menina" ? "kids-tab--girl" : "kids-tab--yellow"
                 } ${active === tab ? "kids-tab--active" : ""}`}
               >
                 {tab}

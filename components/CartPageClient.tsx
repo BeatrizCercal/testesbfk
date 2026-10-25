@@ -13,7 +13,8 @@ import {
   saveCart,
   type CartItem,
 } from "@/data/cart";
-import { formatBRL } from "@/data/products";
+import { formatBRL, productGender } from "@/data/products";
+import { Blob, Sparkle, Squiggle, Star } from "@/components/decor/Shapes";
 
 export function CartPageClient() {
   const router = useRouter();
@@ -48,143 +49,188 @@ export function CartPageClient() {
   }
 
   const total = getCartTotal(items);
+  const count = items.reduce((sum, item) => sum + item.quantity, 0);
+
+  const changeQuantity = (index: number, delta: number) =>
+    updateCart(
+      items.map((current, itemIndex) =>
+        itemIndex === index ? { ...current, quantity: Math.max(1, current.quantity + delta) } : current,
+      ),
+    );
 
   return (
     <>
       <Header />
-      <main className="mx-auto min-h-[60vh] max-w-7xl px-4 py-10 sm:px-6 sm:py-14">
-        <h1 className="font-display text-3xl font-bold text-brand-ink">Minha sacola</h1>
-        {message && (
-          <p role="alert" className="mt-4 rounded-lg bg-brand-pink-50 p-4 text-sm font-semibold text-brand-pink-600">
-            {message}
-          </p>
-        )}
+      <main className="kids-section kids-cart">
+        <Star className="kids-decor kids-twinkle" color="var(--color-yellow)" style={{ width: 28, left: "4%", top: 36 }} />
+        <Sparkle
+          className="kids-decor kids-twinkle kids-decor--desktop"
+          color="var(--color-pink)"
+          style={{ width: 20, right: "6%", top: 48, animationDelay: "1s" }}
+        />
+        <Blob
+          className="kids-decor kids-float--slow kids-float kids-decor--desktop"
+          color="var(--color-pink-light)"
+          style={{ width: 240, right: -90, bottom: 40 }}
+        />
 
-        {items.length === 0 ? (
-          <section className="flex min-h-[35vh] flex-col items-center justify-center gap-4 text-center">
-            <p className="text-lg font-semibold text-brand-ink">Sua sacola está vazia.</p>
-            <Link
-              href="/"
-              className="rounded-full bg-brand-pink-500 px-6 py-3 font-semibold text-white shadow-soft transition hover:bg-brand-pink-600"
-            >
-              Voltar a comprar
-            </Link>
-          </section>
-        ) : (
-          <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_340px]">
-            <ul className="space-y-4">
-              {items.map((item, index) => {
-                return (
-                  <li
-                    key={`${item.product.id}-${item.size ?? "sem-tamanho"}-${index}`}
-                    className="grid grid-cols-[88px_1fr] gap-4 rounded-2xl bg-white p-4 shadow-sm sm:grid-cols-[120px_1fr]"
-                  >
-                    <Link
-                      href={`/produtos/${encodeURIComponent(item.product.id)}`}
-                      className="relative flex aspect-square items-center justify-center overflow-hidden rounded-xl bg-[#F6F6F6]"
-                    >
-                      {item.product.image ? (
-                        <Image
-                          src={item.product.image}
-                          alt={item.product.name}
-                          fill
-                          unoptimized
-                          sizes="120px"
-                          className="object-cover"
-                        />
-                      ) : null}
-                    </Link>
-                    <div className="flex flex-col">
-                      <div className="flex items-start justify-between gap-3">
-                        <div>
-                          <Link
-                            href={`/produtos/${encodeURIComponent(item.product.id)}`}
-                            className="font-bold text-brand-ink hover:text-brand-pink-600"
-                          >
-                            {item.product.name}
-                          </Link>
-                          {item.size && <p className="mt-1 text-sm text-brand-ink/70">Tamanho: {item.size}</p>}
-                        </div>
-                        <button
-                          type="button"
-                          onClick={() => updateCart(items.filter((_, itemIndex) => itemIndex !== index))}
-                          className="text-sm font-semibold text-brand-pink-600 hover:underline"
-                          aria-label={`Remover ${item.product.name} da sacola`}
-                        >
-                          Remover
-                        </button>
-                      </div>
-                      <div className="mt-auto flex flex-wrap items-end justify-between gap-3 pt-4">
-                        <div className="flex h-10 items-center rounded-lg border border-brand-sky-100">
-                          <button
-                            type="button"
-                            aria-label={`Diminuir quantidade de ${item.product.name}`}
-                            onClick={() =>
-                              updateCart(
-                                items.map((current, itemIndex) =>
-                                  itemIndex === index
-                                    ? { ...current, quantity: Math.max(1, current.quantity - 1) }
-                                    : current,
-                                ),
-                              )
-                            }
-                            className="flex h-full w-9 items-center justify-center text-brand-ink/70 hover:text-brand-pink-500"
-                          >
-                            −
-                          </button>
-                          <span className="w-6 text-center text-sm font-semibold">{item.quantity}</span>
-                          <button
-                            type="button"
-                            aria-label={`Aumentar quantidade de ${item.product.name}`}
-                            onClick={() =>
-                              updateCart(
-                                items.map((current, itemIndex) =>
-                                  itemIndex === index
-                                    ? { ...current, quantity: current.quantity + 1 }
-                                    : current,
-                                ),
-                              )
-                            }
-                            className="flex h-full w-9 items-center justify-center text-brand-ink/70 hover:text-brand-pink-500"
-                          >
-                            +
-                          </button>
-                        </div>
-                        <p className="font-bold text-brand-ink">
-                          {formatBRL(item.product.price * item.quantity)}
-                        </p>
-                      </div>
-                    </div>
-                  </li>
-                );
-              })}
-            </ul>
-
-            <aside className="h-fit rounded-2xl bg-white p-6 shadow-sm">
-              <h2 className="text-lg font-bold text-brand-ink">Resumo do pedido</h2>
-              <div className="mt-5 flex justify-between border-t border-brand-sky-100 pt-4 text-base">
-                <span className="font-semibold text-brand-ink">Subtotal</span>
-                <span className="font-bold text-brand-ink">{formatBRL(total)}</span>
-              </div>
-              <p className="mt-2 text-sm text-brand-ink/60">Frete calculado na próxima etapa.</p>
-              <button
-                type="button"
-                onClick={checkout}
-                className="mt-6 min-h-12 w-full rounded-lg bg-brand-pink-500 px-5 py-3 font-bold text-white shadow-soft transition hover:bg-brand-pink-600"
-              >
-                Ir para pagamento
-              </button>
-              <Link
-                href="/"
-                className="mt-4 block text-center text-sm font-semibold text-brand-sky-600 hover:underline"
-              >
-                Continuar comprando
-              </Link>
-            </aside>
+        <div className="kids-cart__inner">
+          <div className="kids-cart__head">
+            <span className="kids-cart__icon" aria-hidden="true">
+              <BagIcon />
+            </span>
+            <h1 className="kids-cart__title">Minha sacola</h1>
+            {items.length > 0 && (
+              <span className="kids-cart__count">
+                {count} {count === 1 ? "item" : "itens"}
+              </span>
+            )}
           </div>
-        )}
+          <Squiggle className="kids-cart__squiggle" color="var(--color-pink)" />
+
+          {message && (
+            <p role="alert" className="kids-cart__alert">
+              {message}
+            </p>
+          )}
+
+          {items.length === 0 ? (
+            <section className="kids-cart__empty">
+              <span className="kids-cart__empty-icon" aria-hidden="true">
+                <BagIcon />
+              </span>
+              <p className="kids-cart__empty-text">Sua sacola está vazia.</p>
+              <Link href="/" className="kids-cart__primary">
+                Voltar a comprar
+              </Link>
+            </section>
+          ) : (
+            <div className="kids-cart__layout">
+              <ul className="kids-cart__list">
+                {items.map((item, index) => {
+                  const tone = itemTone(item);
+                  const href = `/produtos/${encodeURIComponent(item.product.id)}`;
+                  return (
+                    <li
+                      key={`${item.product.id}-${item.size ?? "sem-tamanho"}-${index}`}
+                      className={`kids-cart-item kids-cart-item--${tone}`}
+                    >
+                      <Link href={href} className="kids-cart-item__photo" tabIndex={-1} aria-hidden="true">
+                        {item.product.image ? (
+                          <Image
+                            src={item.product.image}
+                            alt=""
+                            fill
+                            unoptimized
+                            sizes="88px"
+                            className="object-cover"
+                          />
+                        ) : null}
+                      </Link>
+
+                      <div className="kids-cart-item__body">
+                        <div className="kids-cart-item__top">
+                          <div>
+                            <Link href={href} className="kids-cart-item__name">
+                              {item.product.name}
+                            </Link>
+                            <div className="kids-cart-item__tags">
+                              <span className="kids-cart-item__tag">{itemAudience(item)}</span>
+                              {item.size && <span className="kids-cart-item__tag is-light">Tam. {item.size}</span>}
+                            </div>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => updateCart(items.filter((_, itemIndex) => itemIndex !== index))}
+                            className="kids-cart-item__remove"
+                            aria-label={`Remover ${item.product.name} da sacola`}
+                            title="Remover"
+                          >
+                            <TrashIcon />
+                          </button>
+                        </div>
+
+                        <div className="kids-cart-item__bottom">
+                          <div className="kids-stepper">
+                            <button
+                              type="button"
+                              aria-label={`Diminuir quantidade de ${item.product.name}`}
+                              onClick={() => changeQuantity(index, -1)}
+                              disabled={item.quantity <= 1}
+                            >
+                              −
+                            </button>
+                            <span aria-live="polite">{item.quantity}</span>
+                            <button
+                              type="button"
+                              aria-label={`Aumentar quantidade de ${item.product.name}`}
+                              onClick={() => changeQuantity(index, 1)}
+                            >
+                              +
+                            </button>
+                          </div>
+                          <p className="kids-cart-item__price">{formatBRL(item.product.price * item.quantity)}</p>
+                        </div>
+                      </div>
+                    </li>
+                  );
+                })}
+              </ul>
+
+              <aside className="kids-cart__summary">
+                <h2 className="kids-cart__summary-title">Resumo do pedido</h2>
+                <div className="kids-cart__row">
+                  <span>
+                    Produtos ({count} {count === 1 ? "item" : "itens"})
+                  </span>
+                  <span>{formatBRL(total)}</span>
+                </div>
+                <div className="kids-cart__row is-total">
+                  <span>Subtotal</span>
+                  <span>{formatBRL(total)}</span>
+                </div>
+                <p className="kids-cart__note">Frete calculado na próxima etapa.</p>
+                <button type="button" onClick={checkout} className="kids-cart__primary is-full">
+                  Ir para pagamento
+                </button>
+                <Link href="/" className="kids-cart__secondary">
+                  Continuar comprando
+                </Link>
+              </aside>
+            </div>
+          )}
+        </div>
       </main>
       <Footer />
     </>
+  );
+}
+
+/** Cor do item: menino azul, menina rosa, unissex amarelo (igual às abas) */
+function itemTone(item: CartItem): "boy" | "girl" | "yellow" {
+  const gender = productGender(item.product);
+  return gender === "Menino" ? "boy" : gender === "Menina" ? "girl" : "yellow";
+}
+
+function itemAudience(item: CartItem): string {
+  if (item.product.category !== "Bebê") return item.product.category;
+  return `Bebê · ${productGender(item.product)}`;
+}
+
+function BagIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8L5 8Z" />
+      <path d="M9 10V6.5a3 3 0 0 1 6 0V10" />
+    </svg>
+  );
+}
+
+function TrashIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M4 7h16M9 7V5h6v2m3 0-.8 12a2 2 0 0 1-2 1.9H8.8a2 2 0 0 1-2-1.9L6 7" />
+      <path d="M10 11v6m4-6v6" />
+    </svg>
   );
 }

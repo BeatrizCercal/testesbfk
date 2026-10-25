@@ -793,3 +793,399 @@ html {
   }
 
 }
+
+/* ---------- Minha sacola ---------- */
+
+.kids-cart {
+  min-height: 60vh;
+  padding: 2.5rem 0 4rem;
+}
+
+.kids-cart__inner {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+@media (min-width: 640px) {
+  .kids-cart__inner {
+    padding: 0 1.5rem;
+  }
+}
+
+.kids-cart__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.kids-cart__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 40% 60% 55% 45% / 50% 45% 55% 50%;
+  background-color: var(--color-pink);
+  color: #ffffff;
+}
+
+.kids-cart__icon svg {
+  width: 26px;
+  height: 26px;
+}
+
+.kids-cart__title {
+  font-size: 1.9rem;
+  font-weight: 900;
+  color: var(--color-sky-dark);
+}
+
+.kids-cart__count {
+  border-radius: 9999px;
+  background-color: var(--color-yellow);
+  padding: 0.3rem 0.85rem;
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--color-pink-dark);
+}
+
+.kids-cart__squiggle {
+  display: block;
+  width: 96px;
+  height: 14px;
+  margin-top: 0.5rem;
+}
+
+.kids-cart__alert {
+  margin-top: 1rem;
+  border-radius: 1rem;
+  background-color: var(--color-pink-light);
+  padding: 1rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-pink-dark);
+}
+
+.kids-cart__layout {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .kids-cart__layout {
+    grid-template-columns: minmax(0, 1fr) 340px;
+    align-items: start;
+  }
+}
+
+.kids-cart__list {
+  display: grid;
+  gap: 1rem;
+}
+
+/* Item da sacola */
+.kids-cart-item {
+  --tone: var(--color-sky-dark);
+  --tone-soft: var(--color-sky-light);
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr);
+  gap: 1rem;
+  align-items: center;
+  border-radius: 1.5rem;
+  border: 2px solid var(--tone-soft);
+  border-left: 8px solid var(--tone);
+  background-color: #ffffff;
+  padding: 0.9rem 1rem;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+@media (min-width: 640px) {
+  .kids-cart-item {
+    grid-template-columns: 88px minmax(0, 1fr);
+  }
+}
+
+.kids-cart-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px -16px rgba(54, 156, 192, 0.5);
+}
+
+.kids-cart-item--girl {
+  --tone: var(--color-pink);
+  --tone-soft: var(--color-pink-light);
+}
+
+.kids-cart-item--yellow {
+  --tone: var(--color-yellow);
+  --tone-soft: #fffbd0;
+}
+
+.kids-cart-item__photo {
+  position: relative;
+  display: block;
+  width: 72px;
+  height: 72px;
+  overflow: hidden;
+  border-radius: 1.1rem;
+  background-color: var(--tone-soft);
+}
+
+@media (min-width: 640px) {
+  .kids-cart-item__photo {
+    width: 88px;
+    height: 88px;
+  }
+}
+
+.kids-cart-item__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.kids-cart-item__top,
+.kids-cart-item__bottom {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.kids-cart-item__bottom {
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.kids-cart-item__name {
+  font-weight: 800;
+  color: var(--color-ink);
+}
+
+.kids-cart-item__name:hover {
+  color: var(--color-sky-dark);
+}
+
+.kids-cart-item__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.35rem;
+}
+
+.kids-cart-item__tag {
+  border-radius: 9999px;
+  background-color: var(--tone);
+  padding: 0.15rem 0.6rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.kids-cart-item--yellow .kids-cart-item__tag {
+  color: var(--color-pink-dark);
+}
+
+.kids-cart-item__tag.is-light {
+  background-color: var(--tone-soft);
+  color: var(--color-ink);
+}
+
+.kids-cart-item__remove {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 9999px;
+  background-color: var(--color-pink-light);
+  color: var(--color-pink);
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.kids-cart-item__remove:hover {
+  background-color: var(--color-pink);
+  color: #ffffff;
+}
+
+.kids-cart-item__remove svg {
+  width: 18px;
+  height: 18px;
+}
+
+.kids-cart-item__price {
+  font-size: 1.15rem;
+  font-weight: 900;
+  color: var(--color-sky-dark);
+}
+
+/* Contador de quantidade */
+.kids-stepper {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  border-radius: 9999px;
+  background-color: var(--color-sky-light);
+  padding: 0.25rem;
+}
+
+.kids-stepper button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 9999px;
+  background-color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--color-sky-dark);
+  transition: transform 0.15s ease;
+}
+
+.kids-stepper button:hover:not(:disabled) {
+  transform: scale(1.1);
+}
+
+.kids-stepper button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.kids-stepper span {
+  min-width: 1.75rem;
+  text-align: center;
+  font-weight: 800;
+  color: var(--color-ink);
+}
+
+/* Resumo */
+.kids-cart__summary {
+  position: relative;
+  border-radius: 1.75rem;
+  border: 2px solid var(--color-sky-light);
+  background-color: #ffffff;
+  padding: 1.5rem;
+  box-shadow: 8px 8px 0 var(--color-yellow);
+}
+
+@media (min-width: 1024px) {
+  .kids-cart__summary {
+    position: sticky;
+    top: 190px;
+  }
+}
+
+.kids-cart__summary-title {
+  font-size: 1.15rem;
+  font-weight: 900;
+  color: var(--color-pink);
+}
+
+.kids-cart__row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  color: rgb(58 33 48 / 0.75);
+}
+
+.kids-cart__row.is-total {
+  border-top: 2px dashed var(--color-sky-light);
+  padding-top: 1rem;
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: var(--color-ink);
+}
+
+.kids-cart__row.is-total span:last-child {
+  color: var(--color-sky-dark);
+}
+
+.kids-cart__note {
+  margin-top: 0.4rem;
+  font-size: 0.85rem;
+  color: rgb(58 33 48 / 0.6);
+}
+
+.kids-cart__primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  border-radius: 9999px;
+  background-color: var(--color-pink);
+  padding: 0.75rem 1.75rem;
+  font-weight: 800;
+  color: #ffffff;
+  box-shadow: 0 8px 18px -10px rgba(194, 87, 138, 0.8);
+  transition: transform 0.2s ease;
+}
+
+.kids-cart__primary:hover {
+  transform: translateY(-2px);
+}
+
+.kids-cart__primary.is-full {
+  width: 100%;
+  margin-top: 1.5rem;
+}
+
+.kids-cart__secondary {
+  display: block;
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-sky-dark);
+}
+
+.kids-cart__secondary:hover {
+  text-decoration: underline;
+}
+
+/* Sacola vazia */
+.kids-cart__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  border-radius: 2rem;
+  border: 2px dashed var(--color-sky-light);
+  background-color: #ffffff;
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+
+.kids-cart__empty-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 96px;
+  height: 96px;
+  border-radius: 63% 37% 54% 46% / 55% 48% 52% 45%;
+  background-color: var(--color-sky-light);
+  color: var(--color-sky-dark);
+  animation: kids-float 6s ease-in-out infinite;
+}
+
+.kids-cart__empty-icon svg {
+  width: 48px;
+  height: 48px;
+}
+
+.kids-cart__empty-text {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--color-ink);
+}

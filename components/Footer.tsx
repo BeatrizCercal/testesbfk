@@ -2,8 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
-import { NewsletterSignup } from "./NewsletterSignup";
+import { useEffect, useState } from "react";
 
 function PhoneIcon() {
   return (
@@ -70,17 +69,37 @@ function WhatsAppIcon({ size = 38, color = "white" }: { size?: number; color?: s
   );
 }
 
-const institutionalLinks = [
-  "Atendimento",
-  "Quem Somos",
-  "Como Comprar",
-  "A Bia Fashion Kids é confiável?",
-  "Como Pagar",
-  "Políticas de entrega",
-  "Trocas e devoluções",
-  "Avaliações",
-  "Política de Privacidade",
+const whatsappMessage = "Olá! Vim pelo site da Bia Fashion Kids e gostaria de mais informações.";
+const whatsappHref = `https://wa.me/5511400000000?text=${encodeURIComponent(whatsappMessage)}`;
+
+type FooterLink = { name: string; href: string; external?: boolean };
+
+const institutionalLinks: FooterLink[] = [
+  { name: "Atendimento", href: whatsappHref, external: true },
+  { name: "Quem Somos", href: "#" },
+  { name: "Como Comprar", href: "#" },
+  { name: "A Bia Fashion Kids é confiável?", href: "#" },
+  { name: "Como Pagar", href: "#" },
+  { name: "Políticas de entrega", href: "#" },
+  { name: "Trocas e devoluções", href: "#" },
+  { name: "Avaliações", href: "/#avaliacoes" },
+  { name: "Política de Privacidade", href: "#" },
 ];
+
+function FooterLinkItem({ link, className }: { link: FooterLink; className: string }) {
+  if (link.external) {
+    return (
+      <a href={link.href} target="_blank" rel="noopener noreferrer" className={className}>
+        {link.name}
+      </a>
+    );
+  }
+  return (
+    <Link href={link.href} className={className}>
+      {link.name}
+    </Link>
+  );
+}
 
 const specialPages = [
   { name: "Meninas", href: "/categorias/meninas" },
@@ -103,25 +122,46 @@ const paymentIcons = [
   { name: "Pix", src: "/footer/pix.png" },
 ];
 
-const whatsappMessage = "Olá! Vim pelo site da Bia Fashion Kids e gostaria de mais informações.";
-const whatsappHref = `https://wa.me/5511400000000?text=${encodeURIComponent(whatsappMessage)}`;
-
 const accordionSections = ["Contato", "Institucional", "Páginas especiais", "Selos de segurança", "Formas de pagamento"];
+
+/** Âncoras da barra de vantagens → seção correspondente do acordeão no mobile */
+const hashToSection: Record<string, string> = {
+  "#institucional": "Institucional",
+  "#selos-de-seguranca": "Selos de segurança",
+  "#formas-de-pagamento": "Formas de pagamento",
+};
 
 export function Footer() {
   const [openSection, setOpenSection] = useState<string | null>(null);
 
+  // No mobile as colunas do desktop ficam escondidas; então, ao clicar em um
+  // link da barra de vantagens, abrimos a seção certa do acordeão e rolamos até ela.
+  useEffect(() => {
+    const handleHash = () => {
+      const section = hashToSection[window.location.hash];
+      if (!section) return;
+      const target = document.getElementById(window.location.hash.slice(1));
+      if (target && target.offsetParent !== null) return; // desktop: o navegador já rola
+      setOpenSection(section);
+      requestAnimationFrame(() => {
+        document.querySelector(`[data-footer-section="${section}"]`)?.scrollIntoView({ behavior: "smooth" });
+      });
+    };
+    handleHash();
+    window.addEventListener("hashchange", handleHash);
+    return () => window.removeEventListener("hashchange", handleHash);
+  }, []);
+
   return (
     <>
-      <NewsletterSignup />
-      <footer className="relative bg-white text-black">
+      <footer id="rodape" className="relative bg-white text-black">
       {/* Mobile-first accordion */}
       <div className="sm:hidden" style={{ backgroundColor: "#71C9E7" }}>
 
         {accordionSections.map((section) => {
           const open = openSection === section;
           return (
-            <div key={section} className="border-t border-white/25">
+            <div key={section} data-footer-section={section} className="border-t border-white/25">
               <button
                 type="button"
                 onClick={() => setOpenSection(open ? null : section)}
@@ -152,10 +192,8 @@ export function Footer() {
                   {section === "Institucional" && (
                     <ul className="space-y-3">
                       {institutionalLinks.map((link) => (
-                        <li key={link}>
-                          <Link href="#" className="uppercase">
-                            {link}
-                          </Link>
+                        <li key={link.name}>
+                          <FooterLinkItem link={link} className="uppercase" />
                         </li>
                       ))}
                     </ul>
@@ -238,14 +276,12 @@ export function Footer() {
           </div>
         </div>
 
-        <nav aria-label="Institucional">
+        <nav id="institucional" aria-label="Institucional">
           <h3 className="font-display text-sm font-bold uppercase tracking-widest text-black">Institucional</h3>
           <ul className="mt-5 space-y-3">
             {institutionalLinks.map((link) => (
-              <li key={link}>
-                <Link href="#" className="text-sm uppercase text-black/80 transition hover:text-black">
-                  {link}
-                </Link>
+              <li key={link.name}>
+                <FooterLinkItem link={link} className="text-sm uppercase text-black/80 transition hover:text-black" />
               </li>
             ))}
           </ul>
@@ -264,12 +300,12 @@ export function Footer() {
           </ul>
         </nav>
 
-        <div>
+        <div id="selos-de-seguranca">
           <h3 className="font-display text-sm font-bold uppercase tracking-widest text-black">Selos de segurança</h3>
           <p className="mt-5 text-sm text-black/80"></p>
         </div>
 
-        <div>
+        <div id="formas-de-pagamento">
           <h3 className="font-display text-sm font-bold uppercase tracking-widest text-black">Formas de pagamento</h3>
           <div className="mt-5 flex flex-wrap gap-2">
             {paymentIcons.map((p) => (

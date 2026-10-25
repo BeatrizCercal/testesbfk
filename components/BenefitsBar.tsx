@@ -1,6 +1,7 @@
 const benefits = [
   {
     title: "Parcelamento",
+    href: "#formas-de-pagamento",
     text: "até 10x Sem Juros",
     icon: (
       <svg width="38" height="38" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -11,6 +12,7 @@ const benefits = [
   },
   {
     title: "Avaliações",
+    href: "#avaliacoes",
     text: "dos Clientes",
     icon: (
       <svg width="38" height="38" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -25,6 +27,7 @@ const benefits = [
   },
   {
     title: "Frete Grátis",
+    href: "#institucional",
     text: "acima de R$ 299 ( Sul e sudeste)",
     icon: (
       <svg width="38" height="38" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -38,6 +41,7 @@ const benefits = [
   },
   {
     title: "Site Confiável",
+    href: "#selos-de-seguranca",
     text: "100% Seguro",
     icon: (
       <svg width="38" height="38" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -55,27 +59,33 @@ export function BenefitsBar() {
       <div className="py-6 sm:hidden">
         <div className="flex w-max animate-marquee gap-12">
           {[...benefits, ...benefits].map((b, i) => (
-            <div key={`${b.title}-${i}`} className="flex shrink-0 items-center gap-3">
+            <a
+              key={`${b.title}-${i}`}
+              href={b.href}
+              className="kids-benefit flex shrink-0 items-center gap-3"
+              aria-hidden={i >= benefits.length}
+              tabIndex={i >= benefits.length ? -1 : undefined}
+            >
               <span className="shrink-0">{b.icon}</span>
               <div className="whitespace-nowrap">
                 <p className="text-base font-bold text-black">{b.title}</p>
                 <p className="text-sm text-gray-500">{b.text}</p>
               </div>
-            </div>
+            </a>
           ))}
         </div>
       </div>
 
       {/* Desktop: static row */}
-      <div className="kids-benefits-row mx-auto hidden max-w-7xl flex-wrap items-center justify-between gap-x-8 gap-y-4 px-4 py-6 sm:flex sm:px-8">
+      <div className="mx-auto hidden max-w-7xl flex-wrap items-center justify-between gap-x-8 gap-y-4 px-4 py-6 sm:flex sm:px-8">
         {benefits.map((b) => (
-          <div key={b.title} className="flex items-center gap-3">
+          <a key={b.title} href={b.href} className="kids-benefit flex items-center gap-3">
             <span className="shrink-0">{b.icon}</span>
             <div>
               <p className="text-base font-bold text-black">{b.title}</p>
               <p className="text-sm text-gray-500">{b.text}</p>
             </div>
-          </div>
+          </a>
         ))}
       </div>
     </section>

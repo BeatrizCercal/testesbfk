@@ -74,13 +74,6 @@
   height: 112px;
 }
 
-/* Abre espaço à direita da barra de vantagens para o selo do hero */
-@media (min-width: 640px) {
-  .kids-benefits-row {
-    padding-right: 150px !important;
-  }
-}
-
 .kids-hero__frame {
   position: relative;
   z-index: 1;
@@ -335,4 +328,66 @@
 
 .kids-beat {
   animation: kids-beat 1.6s ease-in-out infinite;
+}
+
+/* ---------- Equilíbrio azul + rosa ---------- */
+
+:root {
+  --color-sky-dark: #369cc0; /* = brand-sky-600 já usado no projeto */
+  --color-ink: #3a2130; /* = brand-ink já usado no projeto */
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 96px; /* compensa o header fixo ao ir para as âncoras */
+}
+
+@media (min-width: 768px) {
+  html {
+    scroll-padding-top: 180px;
+  }
+}
+
+/* Abas de filtro dos produtos */
+.kids-tab {
+  background-color: var(--color-sky-light);
+  color: var(--color-sky-dark);
+}
+
+.kids-tab:hover {
+  background-color: #d2eff9;
+}
+
+.kids-tab--active,
+.kids-tab--active:hover {
+  background-color: var(--color-sky-dark);
+  color: #ffffff;
+  box-shadow: 0 4px 14px -4px rgba(54, 156, 192, 0.45);
+}
+
+/* Preço e botão Comprar em azul; o rosa fica no favorito e nos selos */
+.kids-price {
+  color: var(--color-sky-dark);
+}
+
+.kids-card__buy {
+  background-color: var(--color-sky-dark) !important;
+}
+
+.kids-card__buy:hover {
+  background-color: var(--color-sky) !important;
+}
+
+/* Itens da barra de vantagens (agora são links) */
+.kids-benefit {
+  border-radius: 1rem;
+  padding: 0.35rem 0.6rem;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.kids-benefit:hover {
+  background-color: var(--color-sky-light);
+  transform: translateY(-2px);
 }

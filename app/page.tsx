@@ -3,8 +3,6 @@ import { HeroCarousel } from "@/components/HeroCarousel";
 import { BenefitsBar } from "@/components/BenefitsBar";
 import { ProductGrid } from "@/components/ProductGrid";
 import { BrandsCarousel } from "@/components/BrandsCarousel";
-import { PijamasPromo } from "@/components/PijamasPromo";
-import { StoreOutletBanners } from "@/components/StoreOutletBanners";
 import { Reviews } from "@/components/Reviews";
 import { Footer } from "@/components/Footer";
 import { WaveDivider } from "@/components/decor/WaveDivider";
@@ -22,23 +20,19 @@ export default function Home() {
           <HeroCarousel />
         </div>
         <div className="animate-fadeIn" style={{ animationDelay: "150ms" }}>
+          <BrandsCarousel />
+        </div>
+        <div className="animate-fadeIn" style={{ animationDelay: "225ms" }}>
           <BenefitsBar />
           <WaveDivider from={WHITE} to={PAGE_BG} />
         </div>
-        <div className="animate-fadeIn" style={{ animationDelay: "225ms" }}>
-          <ProductGrid />
-          <WaveDivider from={PAGE_BG} to={WHITE} flip />
-        </div>
         <div className="animate-fadeIn" style={{ animationDelay: "300ms" }}>
-          <BrandsCarousel />
+          <ProductGrid />
+          <WaveDivider from={PAGE_BG} to={PINK_LIGHT} flip />
         </div>
         <div className="animate-fadeIn" style={{ animationDelay: "450ms" }}>
-          <StoreOutletBanners />
-          <WaveDivider from={WHITE} to={PINK_LIGHT} />
-        </div>
-        <div className="animate-fadeIn" style={{ animationDelay: "600ms" }}>
           <Reviews />
-          <WaveDivider from={PINK_LIGHT} to={WHITE} flip />
+          <WaveDivider from={PINK_LIGHT} to={WHITE} />
         </div>
       </main>
       <Footer />

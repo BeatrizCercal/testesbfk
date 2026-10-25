@@ -68,7 +68,7 @@ export function ProductCard({ product }: { product: Product }) {
           {product.oldPrice && (
             <p className="text-sm text-black/40 line-through">{formatBRL(product.oldPrice)}</p>
           )}
-          <p className="text-3xl font-extrabold text-black">{formatBRL(product.price)}</p>
+          <p className="kids-price text-3xl font-extrabold">{formatBRL(product.price)}</p>
           <p className="mt-1 text-sm text-black/50">{product.installments}</p>
         </div>
 

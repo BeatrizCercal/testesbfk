@@ -60,7 +60,7 @@ export function ProductGrid() {
       <div className="mx-auto max-w-7xl px-4 py-12 sm:py-16">
       <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <p className="text-sm font-bold uppercase tracking-widest text-brand-pink-500">Calçados e acessórios</p>
+          <p className="text-sm font-bold uppercase tracking-widest text-brand-sky-600">Calçados e acessórios</p>
           <h2 id="produtos-heading" className="kids-title font-display text-2xl font-bold text-brand-ink sm:text-3xl">
             <Star className="kids-title__icon kids-wiggle" color="var(--color-sky)" />
             Produtos em destaque
@@ -78,8 +78,8 @@ export function ProductGrid() {
               onClick={() => setActive(tab)}
               className={`rounded-full px-4 py-2 text-sm font-bold transition ${
                 active === tab
-                  ? "bg-brand-pink-500 text-white shadow-soft"
-                  : "bg-brand-pink-50 text-brand-ink/70 hover:bg-brand-pink-100"
+                  ? "kids-tab kids-tab--active"
+                  : "kids-tab"
               }`}
             >
               {tab}

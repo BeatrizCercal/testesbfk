@@ -26,7 +26,7 @@ export function CategoryNav({
             <Link
               href={cat.href}
               onClick={onLinkClick}
-              className={`flex items-center justify-center px-3 py-1.5 text-center text-base font-medium uppercase tracking-wide text-gray-800 transition-colors md:flex-1 md:py-2.5 md:hover:text-white ${hoverColors[i % hoverColors.length]}`}
+              className={`flex items-center justify-center px-3 py-1.5 text-center text-base font-medium uppercase tracking-wide text-brand-sky-600 transition-colors md:flex-1 md:py-2.5 md:hover:text-white ${hoverColors[i % hoverColors.length]}`}
             >
               {cat.name}
             </Link>

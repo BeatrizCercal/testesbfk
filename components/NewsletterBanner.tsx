@@ -44,7 +44,7 @@ export function NewsletterBanner() {
           />
           <button
             type="submit"
-            className="shrink-0 rounded-md bg-brand-pink-200 px-6 py-3 text-sm font-extrabold uppercase tracking-wide text-brand-ink transition hover:bg-brand-pink-300"
+            className="shrink-0 rounded-md bg-brand-pink-200 px-6 py-3 text-sm font-extrabold tracking-wide text-brand-ink transition hover:bg-brand-pink-300"
           >
             Cadastrar
           </button>

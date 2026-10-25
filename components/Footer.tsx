@@ -195,7 +195,7 @@ export function Footer() {
                     <ul className="space-y-3">
                       {institutionalLinks.map((link) => (
                         <li key={link.name}>
-                          <FooterLinkItem link={link} className="uppercase" />
+                          <FooterLinkItem link={link} className="" />
                         </li>
                       ))}
                     </ul>
@@ -204,7 +204,7 @@ export function Footer() {
                     <ul className="space-y-3">
                       {specialPages.map((page) => (
                         <li key={page.name}>
-                          <Link href={page.href} className="uppercase">
+                          <Link href={page.href} className="">
                             {page.name}
                           </Link>
                         </li>
@@ -279,22 +279,22 @@ export function Footer() {
         </div>
 
         <nav id="institucional" aria-label="Institucional">
-          <h3 className="font-display text-sm font-bold uppercase tracking-widest text-black">Institucional</h3>
+          <h3 className="font-display text-sm font-bold text-black">Institucional</h3>
           <ul className="mt-5 space-y-3">
             {institutionalLinks.map((link) => (
               <li key={link.name}>
-                <FooterLinkItem link={link} className="text-sm uppercase text-black/80 transition hover:text-black" />
+                <FooterLinkItem link={link} className="text-sm text-black/80 transition hover:text-black" />
               </li>
             ))}
           </ul>
         </nav>
 
         <nav aria-label="Páginas especiais">
-          <h3 className="font-display text-sm font-bold uppercase tracking-widest text-black">Páginas especiais</h3>
+          <h3 className="font-display text-sm font-bold text-black">Páginas especiais</h3>
           <ul className="mt-5 space-y-3">
             {specialPages.map((page) => (
               <li key={page.name}>
-                <Link href={page.href} className="text-sm uppercase text-black/80 transition hover:text-black">
+                <Link href={page.href} className="text-sm text-black/80 transition hover:text-black">
                   {page.name}
                 </Link>
               </li>
@@ -303,12 +303,12 @@ export function Footer() {
         </nav>
 
         <div id="selos-de-seguranca">
-          <h3 className="font-display text-sm font-bold uppercase tracking-widest text-black">Selos de segurança</h3>
+          <h3 className="font-display text-sm font-bold text-black">Selos de segurança</h3>
           <p className="mt-5 text-sm text-black/80"></p>
         </div>
 
         <div id="formas-de-pagamento">
-          <h3 className="font-display text-sm font-bold uppercase tracking-widest text-black">Formas de pagamento</h3>
+          <h3 className="font-display text-sm font-bold text-black">Formas de pagamento</h3>
           <div className="mt-5 flex flex-wrap gap-2">
             {paymentIcons.map((p) => (
               <div

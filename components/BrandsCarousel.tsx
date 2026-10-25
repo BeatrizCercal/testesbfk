@@ -36,7 +36,7 @@ export function BrandsCarousel() {
   return (
     <section className="relative bg-white py-10" aria-label="Marcas">
       <div className="mx-auto max-w-7xl px-4 sm:px-8">
-        <h2 className="text-center text-xl font-bold uppercase tracking-[0.3em] text-brand-sky-600 sm:text-2xl">
+        <h2 className="text-center text-xl font-bold text-brand-sky-600 sm:text-2xl">
           <span className="kids-title">
             <Sparkle className="kids-title__icon kids-twinkle" color="var(--color-sky)" />
             As melhores marcas

@@ -36,7 +36,7 @@ export function NewsletterSignup() {
           />
           <button
             type="submit"
-            className="shrink-0 rounded-md bg-brand-pink-100 px-6 py-3 text-sm font-bold uppercase tracking-wide text-black transition hover:bg-white"
+            className="shrink-0 rounded-md bg-brand-pink-100 px-6 py-3 text-sm font-bold tracking-wide text-black transition hover:bg-white"
           >
             Cadastrar
           </button>

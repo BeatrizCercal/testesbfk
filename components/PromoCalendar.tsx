@@ -83,7 +83,7 @@ export function PromoCalendar() {
       <div className="mx-auto max-w-5xl px-4 sm:px-8">
         <h2
           id="calendario-titulo"
-          className="text-center text-xl font-bold uppercase tracking-[0.3em] text-brand-sky-600 sm:text-2xl"
+          className="text-center text-xl font-bold text-brand-sky-600 sm:text-2xl"
         >
           <span className="kids-title">
             <Star className="kids-title__icon kids-wiggle" color="var(--color-pink)" />

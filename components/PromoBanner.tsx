@@ -9,7 +9,7 @@ export function PromoBanner() {
         <AccessoryIcon className="pointer-events-none absolute -right-6 -bottom-8 h-44 w-44 rotate-12 opacity-20" aria-hidden="true" />
 
         <div className="relative flex flex-col items-center gap-4 text-center">
-          <p className="rounded-full bg-brand-ink/10 px-4 py-1 text-xs font-extrabold uppercase tracking-widest text-brand-ink">
+          <p className="rounded-full bg-brand-ink/10 px-4 py-1 text-xs font-extrabold text-brand-ink">
             Por tempo limitado
           </p>
           <h2 className="font-display text-3xl font-bold text-brand-ink sm:text-4xl">

@@ -36,7 +36,7 @@ export function ProductCard({ product }: { product: Product }) {
         </button>
         {product.image && product.badge && (
           <span
-            className={`absolute left-3 top-3 rounded-full px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-wide ${badgeStyle[product.badge]}`}
+            className={`absolute left-3 top-3 rounded-full px-2.5 py-1 text-[10px] font-extrabold  tracking-wide ${badgeStyle[product.badge]}`}
           >
             {product.badge}
           </span>

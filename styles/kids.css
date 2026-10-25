@@ -438,7 +438,6 @@ html {
   text-align: center;
   font-size: 0.75rem;
   font-weight: 800;
-  text-transform: uppercase;
   color: var(--color-sky-dark);
 }
 
@@ -603,7 +602,6 @@ html {
 /* Só a primeira letra maiúscula ("Outubro de 2026", "Domingo, 25 de outubro") */
 .kids-cal__month::first-letter,
 .kids-cal-panel__date::first-letter {
-  text-transform: uppercase;
 }
 
 /* Abas Menino sempre azuis e Menina sempre rosa (Bebê, Calçados e onde houver) */
@@ -1240,10 +1238,6 @@ h3,
 }
 
 
-/* Títulos com letras espaçadas (Marcas, Avaliações, Promoções do dia) */
-h2.uppercase {
-  letter-spacing: 0.18em;
-}
 
 /* Fredoka sempre no peso médio (500), sem negrito.
    !important porque várias classes antigas pedem 800/900 (font-bold, font-black...) */
@@ -1399,8 +1393,6 @@ h3,
   font-family: var(--font-title), var(--font-body), sans-serif;
   font-size: 0.8rem;
   font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
   color: var(--color-pink-dark);
 }
 
@@ -1421,8 +1413,6 @@ h3,
   padding: 0.25rem 0.75rem;
   font-size: 0.75rem;
   font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
   color: var(--color-sky-dark);
 }
 
@@ -1669,4 +1659,9 @@ h3,
   .kids-pd {
     --pd-wave-at: 40%;
   }
+}
+
+/* Sem textos em caixa alta no site */
+.uppercase {
+  text-transform: none;
 }

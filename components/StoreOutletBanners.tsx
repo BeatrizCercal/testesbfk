@@ -13,7 +13,7 @@ export function StoreOutletBanners() {
           <Link
             key={banner.id}
             href={banner.href}
-            className={`flex aspect-square items-center justify-center rounded-xl text-center text-xl font-bold uppercase tracking-wide text-white transition hover:opacity-90 ${banner.color}`}
+            className={`flex aspect-square items-center justify-center rounded-xl text-center text-xl font-bold  tracking-wide text-white transition hover:opacity-90 ${banner.color}`}
           >
             {banner.label}
           </Link>

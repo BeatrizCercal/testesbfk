@@ -4,7 +4,7 @@ export function PijamasPromo() {
   return (
     <section className="bg-white py-10" aria-label="Promoção Liquída Inverno">
       <div className="mx-auto max-w-7xl px-4 text-center sm:px-8">
-        <h2 className="text-2xl font-extrabold uppercase tracking-wide text-black">Promo | Liquída Inverno</h2>
+        <h2 className="text-2xl font-extrabold tracking-wide text-black">Promo | Liquída Inverno</h2>
         <div className="mx-auto mt-2 h-1 w-14 bg-black" />
       </div>
 

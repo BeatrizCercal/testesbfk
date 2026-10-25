@@ -7,7 +7,7 @@ export function CategoryGrid() {
     <section className="mx-auto max-w-7xl px-4 py-12 sm:py-16" aria-labelledby="categorias-heading">
       <div className="mb-8 flex items-end justify-between">
         <div>
-          <p className="text-sm font-bold uppercase tracking-widest text-brand-pink-500">Compre por categoria</p>
+          <p className="text-sm font-bold text-brand-pink-500">Compre por categoria</p>
           <h2 id="categorias-heading" className="font-display text-2xl font-bold text-brand-ink sm:text-3xl">
             O que você procura hoje?
           </h2>

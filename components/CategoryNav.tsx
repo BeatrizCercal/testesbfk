@@ -36,7 +36,7 @@ export function CategoryNav({
                 href={cat.href}
                 onClick={onLinkClick}
                 aria-current={current ? "page" : undefined}
-                className="kids-nav-link flex items-center justify-center px-3 py-1.5 text-center text-base font-medium uppercase tracking-wide transition-colors md:flex-1 md:py-2.5"
+                className="kids-nav-link flex items-center justify-center px-3 py-1.5 text-center text-base font-medium tracking-wide transition-colors md:flex-1 md:py-2.5"
               >
                 {cat.name}
               </Link>

@@ -28,7 +28,7 @@ export function Breadcrumb({ current }: { current: string }) {
         <li aria-hidden="true" className="text-gray-300">
           |
         </li>
-        <li className="font-bold uppercase text-black">{current}</li>
+        <li className="font-bold text-black">{current}</li>
       </ol>
     </nav>
   );

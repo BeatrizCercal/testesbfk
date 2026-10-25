@@ -119,7 +119,7 @@ export function Reviews() {
   return (
     <section id="avaliacoes" className="py-12" style={{ backgroundColor: "var(--color-pink-light)" }} aria-label="Avaliações de clientes">
       <div className="mx-auto max-w-7xl px-4 sm:px-8">
-        <h2 className="text-center text-xl font-bold uppercase tracking-[0.3em] text-brand-pink-500 sm:text-2xl">
+        <h2 className="text-center text-xl font-bold text-brand-pink-500 sm:text-2xl">
           <span className="kids-title">
             <Heart className="kids-title__icon kids-beat" />
             Avaliações

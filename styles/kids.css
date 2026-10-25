@@ -1643,13 +1643,9 @@ h3,
   margin-top: 0.5rem;
 }
 
-/* Caixa de preço com a onda azul → rosa (mesma das avaliações), igual para todos os produtos */
+/* Caixa de preço com fundo azul claro sólido para todos os produtos (a onda fica só no fundo da página) */
 .kids-pd .kids-pd__price-box {
-  background-color: var(--color-pink-light);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 200' preserveAspectRatio='none'%3E%3Cpath fill='%23e4f6fc' d='M0,0 L1440,0 L1440,96 C1320,104 1200,72 1080,68 C960,64 840,108 720,120 C600,132 480,104 360,84 C240,64 120,72 0,104 Z'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  padding: 1rem 1.25rem 1.4rem;
+  background-color: var(--color-sky-light);
 }
 
 /* Fundo da página do produto: azul em cima, onda, rosa embaixo (como Avaliações).

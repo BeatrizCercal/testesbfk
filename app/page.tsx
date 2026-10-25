@@ -5,7 +5,7 @@ import { BrandsCarousel } from "@/components/BrandsCarousel";
 import { Reviews } from "@/components/Reviews";
 import { Footer } from "@/components/Footer";
 import { WaveDivider } from "@/components/decor/WaveDivider";
-import { Sparkle, Star } from "@/components/decor/Shapes";
+import { PromoCalendar } from "@/components/PromoCalendar";
 
 const WHITE = "#ffffff";
 const PAGE_BG = "var(--color-background)";
@@ -25,14 +25,7 @@ export default function Home() {
         <div className="animate-fadeIn" style={{ animationDelay: "225ms" }}>
           <BenefitsBar />
           <WaveDivider from={WHITE} to={PAGE_BG} />
-          {/* Faixa azul que faz a transição para o rosa das avaliações */}
-          <div className="kids-section" style={{ backgroundColor: PAGE_BG, height: 72 }} aria-hidden="true">
-            <Star className="kids-decor kids-twinkle" color="var(--color-sky)" style={{ width: 22, left: "12%", top: 18 }} />
-            <Sparkle
-              className="kids-decor kids-twinkle"
-              style={{ width: 18, right: "15%", top: 26, animationDelay: "1s" }}
-            />
-          </div>
+          <PromoCalendar />
           <WaveDivider from={PAGE_BG} to={PINK_LIGHT} flip />
         </div>
         <div className="animate-fadeIn" style={{ animationDelay: "300ms" }}>

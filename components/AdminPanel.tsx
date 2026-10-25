@@ -13,8 +13,9 @@ import {
   type IconKey,
   type Product,
 } from "@/data/products";
+import { AdminPromos } from "./AdminPromos";
 
-type AdminView = "dashboard" | "products" | "sales";
+type AdminView = "dashboard" | "products" | "sales" | "promos";
 type PeriodMode = "day" | "month" | "year";
 type SaleStatus = "Pago" | "Enviado" | "Aguardando pagamento" | "Pagamento atrasado";
 
@@ -169,7 +170,7 @@ function formatSaleDate(soldAt: string): string {
 function Icon({
   name,
 }: {
-  name: "grid" | "box" | "bag" | "plus" | "trend" | "menu" | "close" | "trash";
+  name: "grid" | "box" | "bag" | "plus" | "trend" | "menu" | "close" | "trash" | "calendar";
 }) {
   const paths = {
     grid: (
@@ -200,6 +201,12 @@ function Icon({
       </>
     ),
     menu: <path d="M4 6h16M4 12h16M4 18h16" />,
+    calendar: (
+      <>
+        <rect x="4" y="5" width="16" height="15" rx="2" />
+        <path d="M4 10h16M8 3v4M16 3v4" />
+      </>
+    ),
     close: <path d="m6 6 12 12M18 6 6 18" />,
     trash: (
       <>
@@ -446,10 +453,11 @@ export function AdminPanel() {
     setProductMessage(`"${product.name}" foi removido do catálogo.`);
   };
 
-  const navItems: { id: AdminView; label: string; icon: "grid" | "box" | "bag" }[] = [
+  const navItems: { id: AdminView; label: string; icon: "grid" | "box" | "bag" | "calendar" }[] = [
     { id: "dashboard", label: "Visão geral", icon: "grid" },
     { id: "products", label: "Produtos", icon: "box" },
     { id: "sales", label: "Vendas", icon: "bag" },
+    { id: "promos", label: "Promoções", icon: "calendar" },
   ];
 
   const periodInputType = periodMode === "day" ? "date" : periodMode === "month" ? "month" : "number";
@@ -623,7 +631,15 @@ export function AdminPanel() {
             </button>
             <div>
               <p className="admin-eyebrow">Administração</p>
-              <h1>{view === "dashboard" ? "Visão geral" : view === "products" ? "Produtos" : "Vendas"}</h1>
+              <h1>
+                {view === "dashboard"
+                  ? "Visão geral"
+                  : view === "products"
+                    ? "Produtos"
+                    : view === "promos"
+                      ? "Promoções"
+                      : "Vendas"}
+              </h1>
             </div>
           </div>
           <div className="admin-user">
@@ -989,6 +1005,8 @@ export function AdminPanel() {
               </section>
             </div>
           )}
+
+          {view === "promos" && <AdminPromos />}
 
           <p className="admin-demo-note">
             Vendas de demonstração. Para consultar vendas reais, conecte este painel à plataforma da loja.

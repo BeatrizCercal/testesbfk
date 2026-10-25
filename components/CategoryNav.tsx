@@ -6,17 +6,13 @@ import { usePathname } from "next/navigation";
 
 const BLUE = { color: "var(--color-sky-dark)", fill: "var(--color-sky-medium)" };
 const PINK = { color: "var(--color-pink)", fill: "var(--color-pink)" };
-const MIX = {
-  color: "var(--color-sky-dark)",
-  fill: "linear-gradient(90deg, var(--color-pink), var(--color-sky-medium))",
-};
 
 const categories = [
-  { name: "Bebê", href: "/categorias/bebe", ...MIX },
+  { name: "Bebê", href: "/categorias/bebe", ...BLUE },
   { name: "Meninas", href: "/categorias/meninas", ...PINK },
   { name: "Meninos", href: "/categorias/meninos", ...BLUE },
-  { name: "Calçados", href: "/categorias/calcados", ...MIX },
-  { name: "Acessórios", href: "/categorias/acessorios", ...MIX },
+  { name: "Calçados", href: "/categorias/calcados", ...PINK },
+  { name: "Acessórios", href: "/categorias/acessorios", ...BLUE },
 ];
 
 export function CategoryNav({

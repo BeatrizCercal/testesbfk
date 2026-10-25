@@ -399,21 +399,21 @@ html {
   --kids-accent: var(--color-sky-dark);
   --kids-accent-2: var(--color-sky);
   --kids-soft: var(--color-sky-light);
-  --kids-hero-bg: linear-gradient(135deg, var(--color-sky-light) 0%, #ffffff 100%);
+  --kids-hero-bg: var(--color-sky-light);
 }
 
 .kids-theme--girl {
   --kids-accent: var(--color-pink);
   --kids-accent-2: #ee96bc; /* = brand-pink-300 */
   --kids-soft: var(--color-pink-light);
-  --kids-hero-bg: linear-gradient(135deg, var(--color-pink-light) 0%, #ffffff 100%);
+  --kids-hero-bg: var(--color-pink-light);
 }
 
 .kids-theme--mix {
   --kids-accent: var(--color-sky-dark);
   --kids-accent-2: var(--color-pink);
   --kids-soft: var(--color-sky-light);
-  --kids-hero-bg: linear-gradient(120deg, var(--color-pink-light) 0%, #ffffff 50%, var(--color-sky-light) 100%);
+  --kids-hero-bg: #ffffff;
 }
 
 /* No tema misto os cards alternam azul e rosa */
@@ -462,12 +462,6 @@ html {
   color: #ffffff;
 }
 
-.kids-theme--mix .kids-tab--active,
-.kids-theme--mix .kids-tab--active:hover {
-  background-image: linear-gradient(90deg, var(--color-pink), var(--color-sky-dark));
-  border-color: transparent;
-}
-
 /* Banner do topo da categoria */
 .kids-cat-hero {
   position: relative;
@@ -497,13 +491,6 @@ html {
   .kids-cat-hero__title {
     font-size: 3.25rem;
   }
-}
-
-.kids-theme--mix .kids-cat-hero__title {
-  background-image: linear-gradient(90deg, var(--color-pink), var(--color-sky-dark));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
 }
 
 .kids-cat-hero__count {

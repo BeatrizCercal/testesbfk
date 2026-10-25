@@ -656,9 +656,13 @@ html {
   }
 }
 
-/* Abas Todos e Unissex no amarelo da logo (texto escuro para ficar legível) */
+/* Abas Todos e Unissex no amarelo da logo, com texto rosa escuro (legível no amarelo) */
+:root {
+  --color-pink-dark: #a24372; /* = brand-pink-600 já usado no projeto */
+}
+
 [class*="kids-theme--"] .kids-tab--yellow {
-  color: var(--color-ink);
+  color: var(--color-pink-dark);
   border-color: var(--color-yellow);
 }
 
@@ -671,6 +675,6 @@ html {
 [class*="kids-theme--"] .kids-tab--yellow.kids-tab--active:hover {
   background-color: var(--color-yellow);
   border-color: var(--color-yellow);
-  color: var(--color-ink);
+  color: var(--color-pink-dark);
   box-shadow: 0 4px 14px -4px rgba(180, 168, 0, 0.45);
 }

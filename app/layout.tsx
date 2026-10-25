@@ -5,7 +5,7 @@ import "./globals.css";
 /** Títulos, preços, botões e menu: arredondada e divertida */
 const fredoka = Fredoka({
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
+  weight: ["400", "500"],
   variable: "--font-title",
   display: "swap",
 });

@@ -18,8 +18,10 @@ import {
   isProduct,
   products as initialProducts,
   PRODUCT_STORAGE_KEY,
+  productGender,
   type Product,
 } from "@/data/products";
+import { Blob, Sparkle, Star } from "@/components/decor/Shapes";
 
 export default function ProductDetailsPage() {
   const params = useParams<{ id: string }>();
@@ -32,6 +34,7 @@ export default function ProductDetailsPage() {
   const [quantity, setQuantity] = useState(1);
   const [catalogMessage, setCatalogMessage] = useState("");
   const [cartMessage, setCartMessage] = useState("");
+  const [cartAdded, setCartAdded] = useState(false);
 
   useEffect(() => {
     try {
@@ -60,6 +63,7 @@ export default function ProductDetailsPage() {
   function makeCartItem(): CartItem | null {
     if (!product) return null;
     if (product.sizes?.length && !selectedSize) {
+      setCartAdded(false);
       setCartMessage("Selecione um tamanho antes de continuar.");
       return null;
     }
@@ -85,8 +89,10 @@ export default function ProductDetailsPage() {
       }
 
       saveCart(cart);
+      setCartAdded(true);
       setCartMessage("Produto adicionado à sacola.");
     } catch {
+      setCartAdded(false);
       setCartMessage("Não foi possível salvar o produto na sacola. Tente novamente.");
     }
   }
@@ -104,164 +110,184 @@ export default function ProductDetailsPage() {
     }
   }
 
+  const tone = product ? productTone(product) : "boy";
+  const backHref = product ? categoryHref(product) : "/";
+
   return (
     <>
       <Header />
-      <main className="mx-auto min-h-[60vh] max-w-7xl px-4 py-8 sm:px-6 sm:py-12">
-        <Link
-          href="/"
-          className="mb-6 inline-flex items-center gap-2 text-sm font-semibold text-brand-sky-600 transition hover:text-brand-pink-500"
-        >
-          <span aria-hidden="true">←</span> Voltar para os produtos
-        </Link>
+      <main className={`kids-section kids-pd kids-pd--${tone}`}>
+        <Star className="kids-decor kids-twinkle" color="var(--color-yellow)" style={{ width: 28, left: "3%", top: 40 }} />
+        <Sparkle
+          className="kids-decor kids-twinkle kids-decor--desktop"
+          color="var(--color-pink)"
+          style={{ width: 20, right: "5%", top: 70, animationDelay: "1s" }}
+        />
+        <Blob
+          className="kids-decor kids-float--slow kids-float kids-decor--desktop"
+          color="var(--pd-soft)"
+          style={{ width: 280, left: -110, bottom: 20 }}
+        />
 
-        {product ? (
-          <article className="grid gap-8 rounded-2xl bg-white sm:gap-10 md:grid-cols-2 md:items-start">
-            <div className="relative flex aspect-square items-center justify-center overflow-hidden rounded-2xl bg-[#F6F6F6] sm:aspect-[4/3] md:aspect-square">
-              {product.image ? (
-                <Image
-                  src={product.image}
-                  alt={product.name}
-                  fill
-                  unoptimized
-                  priority
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover"
-                />
-              ) : null}
-              {product.image && product.badge && (
-                <span className="absolute left-4 top-4 rounded-full bg-brand-sky-500 px-3 py-1.5 text-xs font-extrabold uppercase tracking-wide text-white">
-                  {product.badge}
-                </span>
-              )}
-            </div>
+        <div className="kids-pd__inner">
+          <Link href={backHref} className="kids-pd__back">
+            <span aria-hidden="true">←</span> Voltar para os produtos
+          </Link>
 
-            <div className="flex flex-col py-1 md:py-4">
-              <p className="text-sm font-bold uppercase tracking-widest text-brand-pink-500">
-                {product.icon === "shoe" ? "Calçado infantil" : "Acessório infantil"}
-              </p>
-              <h1 className="mt-2 font-display text-3xl font-bold text-brand-ink sm:text-4xl">
-                {product.name}
-              </h1>
-
-              <div className="mt-5 border-b border-brand-sky-100 pb-5">
-                {product.oldPrice && (
-                  <p className="text-base text-black/45 line-through">{formatBRL(product.oldPrice)}</p>
-                )}
-                <p className="mt-1 text-3xl font-extrabold text-brand-ink">{formatBRL(product.price)}</p>
-                <p className="mt-1 text-sm text-black/60">{product.installments}</p>
+          {product ? (
+            <article className="kids-pd__grid">
+              <div className="kids-pd__media">
+                {product.image ? (
+                  <Image
+                    src={product.image}
+                    alt={product.name}
+                    fill
+                    unoptimized
+                    priority
+                    sizes="(max-width: 900px) 100vw, 50vw"
+                    className="object-cover"
+                  />
+                ) : null}
+                {product.badge && <span className="kids-pd__badge">{product.badge}</span>}
               </div>
 
-              <section className="mt-6" aria-labelledby="description-heading">
-                <h2 id="description-heading" className="text-base font-bold text-brand-ink">
-                  Sobre o produto
-                </h2>
-                <p className="mt-2 leading-7 text-black/70">
-                  {product.description || "Um produto especial para acompanhar os momentos do dia a dia."}
-                </p>
-              </section>
-
-              {product.sizes && product.sizes.length > 0 && (
-                <fieldset className="mt-6">
-                  <legend className="text-sm font-bold text-brand-ink">
-                    Tamanho{selectedSize ? `: ${selectedSize}` : ""}
-                  </legend>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    {product.sizes.map((size) => (
-                      <button
-                        key={size}
-                        type="button"
-                        aria-pressed={selectedSize === size}
-                        onClick={() => setSelectedSize(size)}
-                        className={`min-h-11 min-w-11 rounded-lg border px-3 text-sm font-semibold transition ${
-                          selectedSize === size
-                            ? "border-brand-pink-500 bg-brand-pink-500 text-white"
-                            : "border-brand-sky-100 text-brand-ink hover:border-brand-pink-300"
-                        }`}
-                      >
-                        {size}
-                      </button>
-                    ))}
-                  </div>
-                </fieldset>
-              )}
-
-              <div className="mt-6 flex items-center gap-4">
-                <span className="text-sm font-bold text-brand-ink">Quantidade</span>
-                <div className="flex h-11 items-center rounded-lg border border-brand-sky-100">
-                  <button
-                    type="button"
-                    aria-label="Diminuir quantidade"
-                    onClick={() => setQuantity((current) => Math.max(1, current - 1))}
-                    className="flex h-full w-10 items-center justify-center text-brand-ink/70 transition hover:text-brand-pink-500"
-                  >
-                    −
-                  </button>
-                  <span aria-live="polite" className="w-6 text-center text-sm font-semibold text-brand-ink">
-                    {quantity}
+              <div className="kids-pd__info">
+                <div className="kids-pd__tags">
+                  <span className="kids-pd__tag">
+                    {product.icon === "shoe" ? "Calçado infantil" : "Acessório infantil"}
                   </span>
-                  <button
-                    type="button"
-                    aria-label="Aumentar quantidade"
-                    onClick={() => setQuantity((current) => current + 1)}
-                    className="flex h-full w-10 items-center justify-center text-brand-ink/70 transition hover:text-brand-pink-500"
-                  >
-                    +
+                  <span className="kids-pd__tag is-tone">{audienceLabel(product)}</span>
+                </div>
+
+                <h1 className="kids-pd__title">{product.name}</h1>
+
+                <div className="kids-pd__price-box">
+                  {product.oldPrice && <p className="kids-pd__old-price">{formatBRL(product.oldPrice)}</p>}
+                  <p className="kids-pd__price">{formatBRL(product.price)}</p>
+                  <p className="kids-pd__installments">{product.installments}</p>
+                </div>
+
+                <section className="kids-pd__block" aria-labelledby="description-heading">
+                  <h2 id="description-heading" className="kids-pd__label">
+                    Sobre o produto
+                  </h2>
+                  <p className="kids-pd__description">
+                    {product.description || "Um produto especial para acompanhar os momentos do dia a dia."}
+                  </p>
+                </section>
+
+                {product.sizes && product.sizes.length > 0 && (
+                  <fieldset className="kids-pd__block">
+                    <legend className="kids-pd__label">
+                      Tamanho{selectedSize ? `: ${selectedSize}` : ""}
+                    </legend>
+                    <div className="kids-pd__sizes">
+                      {product.sizes.map((size) => (
+                        <button
+                          key={size}
+                          type="button"
+                          aria-pressed={selectedSize === size}
+                          onClick={() => {
+                            setSelectedSize(size);
+                            setCartMessage("");
+                          }}
+                          className="kids-pd__size"
+                        >
+                          {size}
+                        </button>
+                      ))}
+                    </div>
+                  </fieldset>
+                )}
+
+                <div className="kids-pd__block kids-pd__qty">
+                  <span className="kids-pd__label">Quantidade</span>
+                  <div className="kids-stepper">
+                    <button
+                      type="button"
+                      aria-label="Diminuir quantidade"
+                      onClick={() => setQuantity((current) => Math.max(1, current - 1))}
+                      disabled={quantity <= 1}
+                    >
+                      −
+                    </button>
+                    <span aria-live="polite">{quantity}</span>
+                    <button type="button" aria-label="Aumentar quantidade" onClick={() => setQuantity((current) => current + 1)}>
+                      +
+                    </button>
+                  </div>
+                </div>
+
+                <div className="kids-pd__actions">
+                  <button type="button" onClick={buyNow} className="kids-pd__buy">
+                    Comprar agora
+                  </button>
+                  <button type="button" onClick={addToCart} className="kids-pd__add">
+                    <BagIcon />
+                    Adicionar à sacola
                   </button>
                 </div>
+
+                {cartMessage && (
+                  <p role="status" className={`kids-pd__toast ${cartAdded ? "is-success" : ""}`}>
+                    {cartMessage}
+                    {cartAdded && (
+                      <Link href="/carrinho" className="kids-pd__toast-link">
+                        Ver sacola
+                      </Link>
+                    )}
+                  </p>
+                )}
+
+                {catalogMessage && (
+                  <p role="status" className="kids-pd__toast">
+                    {catalogMessage}
+                  </p>
+                )}
               </div>
-
-              <div className="mt-7 grid gap-3 sm:grid-cols-2">
-                <button
-                  type="button"
-                  onClick={addToCart}
-                  className="min-h-12 rounded-lg border-2 border-brand-pink-500 px-5 py-3 text-sm font-bold text-brand-pink-600 transition hover:bg-brand-pink-50"
-                >
-                  Adicionar ao carrinho
-                </button>
-                <button
-                  type="button"
-                  onClick={buyNow}
-                  className="min-h-12 rounded-lg bg-brand-pink-500 px-5 py-3 text-sm font-bold text-white shadow-soft transition hover:bg-brand-pink-600"
-                >
-                  Comprar agora
-                </button>
-              </div>
-
-              {cartMessage && (
-                <p role="status" className="mt-4 text-sm font-semibold text-brand-sky-600">
-                  {cartMessage}
-                </p>
-              )}
-
+            </article>
+          ) : (
+            <section className="kids-pd__missing">
+              <h1 className="kids-pd__title">Produto não encontrado</h1>
+              <p className="kids-pd__description">Este produto pode ter sido removido do catálogo.</p>
               {catalogMessage && (
-                <p role="status" className="mt-4 text-sm text-brand-pink-600">
+                <p role="status" className="kids-pd__toast">
                   {catalogMessage}
                 </p>
               )}
-            </div>
-          </article>
-        ) : (
-          <section className="flex min-h-[40vh] flex-col items-center justify-center gap-4 text-center">
-            <h1 className="text-2xl font-bold text-brand-ink">Produto não encontrado</h1>
-            <p className="max-w-md text-brand-ink/70">
-              Este produto pode ter sido removido do catálogo.
-            </p>
-            {catalogMessage && (
-              <p role="status" className="text-sm text-brand-pink-600">
-                {catalogMessage}
-              </p>
-            )}
-            <Link
-              href="/"
-              className="mt-2 rounded-full bg-brand-pink-500 px-6 py-3 font-semibold text-white shadow-soft transition hover:bg-brand-pink-600"
-            >
-              Ver produtos
-            </Link>
-          </section>
-        )}
+              <Link href="/" className="kids-pd__buy">
+                Ver produtos
+              </Link>
+            </section>
+          )}
+        </div>
       </main>
       <Footer />
     </>
+  );
+}
+
+/** Menino azul, menina rosa, unissex amarelo (mesmo padrão das abas e da sacola) */
+function productTone(product: Product): "boy" | "girl" | "yellow" {
+  const gender = productGender(product);
+  return gender === "Menino" ? "boy" : gender === "Menina" ? "girl" : "yellow";
+}
+
+function audienceLabel(product: Product): string {
+  return product.category === "Bebê" ? `Bebê · ${productGender(product)}` : product.category;
+}
+
+/** "Voltar" leva para a categoria do produto */
+function categoryHref(product: Product): string {
+  if (product.category === "Bebê") return "/categorias/bebe";
+  return product.category === "Menino" ? "/categorias/meninos" : "/categorias/meninas";
+}
+
+function BagIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8L5 8Z" />
+      <path d="M9 10V6.5a3 3 0 0 1 6 0V10" />
+    </svg>
   );
 }

@@ -22,6 +22,7 @@ import {
   type Product,
 } from "@/data/products";
 import { Blob, Sparkle, Star } from "@/components/decor/Shapes";
+import { WaveDivider } from "@/components/decor/WaveDivider";
 
 export default function ProductDetailsPage() {
   const params = useParams<{ id: string }>();
@@ -262,6 +263,7 @@ export default function ProductDetailsPage() {
           )}
         </div>
       </main>
+      <WaveDivider from="var(--color-pink-light)" to="#ffffff" />
       <Footer />
     </>
   );

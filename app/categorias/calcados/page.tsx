@@ -18,6 +18,7 @@ export default function CategoriaCalcadosPage() {
           categoryKey="calcados"
           title="Calçados"
           theme="mix"
+          hideHero
           subdivisions={["Menino", "Menina"]}
         />
       </main>

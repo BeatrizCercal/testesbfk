@@ -18,6 +18,7 @@ export default function CategoriaBebePage() {
           categoryKey="bebe"
           title="Bebê"
           theme="mix"
+          hideHero
           subdivisions={["Menino", "Menina", "Unissex"]}
         />
       </main>

@@ -16,6 +16,8 @@ type CategoryCatalogProps = {
   theme: CategoryTheme;
   /** Abas de subdivisão (ex.: Menino / Menina / Unissex). Sem abas quando vazio. */
   subdivisions?: BabyGender[];
+  /** Esconde o banner com o título grande (o título continua para leitores de tela) */
+  hideHero?: boolean;
 };
 
 /** Slug usado na URL (?genero=menino) para poder compartilhar a aba aberta */
@@ -25,7 +27,13 @@ const toSlug = (value: Subdivision) =>
     .replace(/[̀-ͯ]/g, "")
     .toLowerCase();
 
-export function CategoryCatalog({ categoryKey, title, theme, subdivisions = [] }: CategoryCatalogProps) {
+export function CategoryCatalog({
+  categoryKey,
+  title,
+  theme,
+  subdivisions = [],
+  hideHero = false,
+}: CategoryCatalogProps) {
   const { products, catalogMessage } = useCatalog();
   const tabs: Subdivision[] = subdivisions.length > 0 ? ["Todos", ...subdivisions] : [];
   const [active, setActive] = useState<Subdivision>("Todos");
@@ -59,6 +67,9 @@ export function CategoryCatalog({ categoryKey, title, theme, subdivisions = [] }
   return (
     <div className={`kids-theme--${theme}`}>
       <div className="mx-auto max-w-7xl px-4 sm:px-8">
+        {hideHero ? (
+          <h1 className="sr-only">{title}</h1>
+        ) : (
         <section className="kids-cat-hero" aria-labelledby="categoria-titulo">
           <Blob className="kids-decor kids-float--slow kids-float" color={soft2} style={{ width: 220, left: -70, top: -60 }} />
           <Blob className="kids-decor kids-float" color={soft} style={{ width: 200, right: -60, bottom: -70 }} />
@@ -83,9 +94,10 @@ export function CategoryCatalog({ categoryKey, title, theme, subdivisions = [] }
             {inCategory.length} {inCategory.length === 1 ? "produto" : "produtos"}
           </p>
         </section>
+        )}
 
         {tabs.length > 0 && (
-          <div className="mt-8 flex flex-wrap justify-center gap-2" role="tablist" aria-label={`Filtrar ${title}`}>
+          <div className={`${hideHero ? "mt-2" : "mt-8"} flex flex-wrap justify-center gap-2`} role="tablist" aria-label={`Filtrar ${title}`}>
             {tabs.map((tab) => (
               <button
                 key={tab}
